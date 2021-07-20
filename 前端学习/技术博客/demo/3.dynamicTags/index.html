@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    button{
+      margin-left: 10px;
+      height: 32px;
+      width: 90px;
+      line-height: 30px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    input{
+      margin-left: 10px;
+      height: 32px;
+      width: 90px;
+      line-height: 30px;
+      padding-top: 0;
+      padding-bottom: 0;
+      display: none;
+    }
+    #dynamicTag{
+      height: 50px;
+    }
+    #dynamicTag span{
+      background-color: #e8f4ff;
+      border-color: #d1e9ff;
+      color: #1890ff;
+      display: inline-block;
+      height: 32px;
+      padding: 0 10px;
+      line-height: 30px;
+      font-size: 12px;
+      color: #1890ff;
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 4px;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      white-space: nowrap;
+      margin: 5px;
+    }
+    #dynamicTag span i:before {
+      content: "×";
+      cursor: pointer;
+      margin: 2px;
+    }
+    #dynamicTag span i:hover {
+      width: 10px;
+      height: 10px;
+      padding: 2px;
+      color: white;
+      border-radius: 50%;
+      background-color: #1890ff;
+    }
+  </style>
+</head>
+<body>
+  <div id="dynamicTag"></div>
+
+  <input type="text" id="input">
+  <button id="btn">+ New 算法</button>
+
+  <script>
+    let input = document.getElementById('input');
+    let btn = document.getElementById('btn');
+    let dynamicTag = document.getElementById('dynamicTag');
+    // 存储动态标签内容
+    let dynamicTags = new Map();
+
+    // 按钮点击事件
+    btn.addEventListener('click', function(e) {
+      this.style.display = 'none';
+      input.style.display = 'block';
+      input.focus();
+    });
+
+    // input框失去焦点事件
+    input.addEventListener('blur', function(e) {
+      this.style.display = 'none';
+      btn.style.display = 'block';
+      // 数据保存到数组
+      if(this.value){
+        let len = dynamicTags.size;
+        dynamicTags.set(len + '', this.value)
+        newDynamicTag(len, this.value);
+      }
+      // 清空input数据
+      this.value = '';
+    });
+
+    // 创建标签
+    function newDynamicTag(dataIndex, content) {
+      let spanArr = [];
+      // 创建tag dom标签
+      let spanNode = document.createElement('span');
+      spanNode.textContent = content;
+      // 创建i标签，close
+      let iNode = document.createElement('i');
+      iNode.setAttribute('data-index', dataIndex);
+      // 添加close事件
+      iNode.addEventListener('click', function (e) {
+        let dataIndex = this.getAttribute('data-index')
+        // 从数组中删除该数据
+        dynamicTags.delete(dataIndex);
+        // 从dom树删除该标签
+        let tagParent = this.parentNode;
+        dynamicTag.removeChild(tagParent);
+      });
+      // i标签插入span标签
+      spanNode.appendChild(iNode);
+      // span标签插入dynamicTag下
+      dynamicTag.appendChild(spanNode);
+    }
+
+
+  </script>
+</body>
+</html>
