@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>防抖函数</title>
+  <style>
+    #box{
+      margin: 10px 0;
+      width: 250px;
+      height: 35px;
+      border: solid #ccc 1px;
+    }
+    #inner{
+      width: 1%;
+      height: 100%;
+      line-height: 35px;
+      text-align: center;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" name="" id="input">
+  <div id="box">
+    <div id="inner"></div>
+  </div>
+  <button id="btn">下 载</button>
+  <script>
+  // 防抖函数
+  // 当持续触发事件 一定时间内没有再触发事件 事件函数才会执行一次
+  function debounce(callback, delay){
+    let timer;
+    // 闭包存储timer值
+    return function(arg){
+      clearTimeout(timer);
+      timer = setTimeout(function(){
+        callback(arg)
+      }, delay)
+    }
+  }
+
+  // 应用一：控制输入框一定时间内执行最后一次输入触发请求
+  let debounceFun = debounce(function(value){
+    console.log(value);
+  }, 1000)
+  let input = document.getElementById('input')
+  input.addEventListener('keyup', function(e){
+    debounceFun(e.target.value)
+  })
+
+
+  // 应用二：控制按钮一定时间内执行最后一次点击触发次数
+  let inter
+  function func2() {
+    console.log("click...");
+    let process = document.getElementById('inner');
+    let w = 0;   
+    console.log(inter);
+    clearInterval(inter);
+    inter = setInterval(() => {
+      if(w < 100) {
+        w++;
+        process.style.width = w + '%';
+        process.innerHTML = w + '%';
+      } else {
+        clearInterval(inter);
+      }        
+    }, 100);
+  }
+
+  let debounceFun2 = debounce(func2, 2000)
+  let btn = document.getElementById('btn')
+  btn.addEventListener('click', function(e){
+    debounceFun2()
+  })
+
+  </script>
+</body>
+</html>
