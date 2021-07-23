@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <title>CSS3-边框</title>
+  <link rel="stylesheet" href="../css/base.css">  
+  <style>
+    .case1 {
+      width: 650px;
+      height: 450px;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .case1 .box{
+      width: 150px;
+      height: 150px;
+      background-color: #fff;
+      box-shadow: 120px 80px 40px 20px #0ff;
+    }
+  </style>
+</head>
+<body>
+  <a href="#top" class="go-top">Top</a>
+  <div id="top"></div>
+	<div class="wrapper">
+		<header>CSS3-边框</header>
+		<section>
+			<header>简介</header>
+			<div class="wrap-box">
+        <p>
+          元素的边框就是围绕元素内容和内边距的一条或多条线。
+          其边框圆角、边框阴影属性，应用十分广泛，兼容性也相对较好，具有符合渐进增强原则的特征，我们需要重点掌握。
+        </p>
+			</div>
+    </section> 
+    <section>
+      <header>边框</header>
+      <div class="wrap-box">
+        <h4>语法</h4>
+        <p>border：[ border-width ] || [ border-style ] || [ border-color ]</p>
+        <h4>边框属性</h4>
+        <ul>
+          <li>border	简写属性，用于把针对四个边的属性设置在一个声明。</li>
+          <li>border-width	简写属性，用于为元素的所有边框设置宽度，或者单独地为各边边框设置宽度。</li>
+            <ul>
+              <li>常用单位为像素(px)、em</li>
+              <li>thin细的边框。/medium	默认/thick	定义粗的边框。</li>
+            </ul>
+          <li>border-style	用于设置元素所有边框的样式，或者单独地为各边设置边框样式。</li>
+            <ul>
+              <li>none	定义无边框。</li>
+              <li>dotted	定义点状边框</li>
+              <li>dashed	定义虚线</li>
+              <li>solid	定义实线。</li>
+              <li>double	定义双线</li>
+              <li>groove	定义 3D 凹槽边框。</li>
+              <li>ridge	定义 3D 垄状边框。</li>
+              <li>inset	定义 3D inset 边框</li>
+              <li>outset	定义 3D outset 边框。</li>
+            </ul>
+          <li>border-color	简写属性，设置元素的所有边框中可见部分的颜色，或为 4 个边分别设置颜色。</li>
+          <li>border-bottom	简写属性，用于把下边框的所有属性设置到一个声明中。</li>
+          <li>border-bottom-color	设置元素的下边框的颜色。</li>
+          <li>border-bottom-style	设置元素的下边框的样式。</li>
+          <li>border-bottom-width	设置元素的下边框的宽度。</li>
+          <li>border-left	简写属性，用于把左边框的所有属性设置到一个声明中。</li>
+          <li>border-left-color	设置元素的左边框的颜色。</li>
+          <li>border-left-style	设置元素的左边框的样式。</li>
+          <li>border-left-width	设置元素的左边框的宽度。</li>
+          <li>border-right	简写属性，用于把右边框的所有属性设置到一个声明中。</li>
+          <li>border-right-color	设置元素的右边框的颜色。</li>
+          <li>border-right-style	设置元素的右边框的样式。</li>
+          <li>border-right-width	设置元素的右边框的宽度。</li>
+          <li>border-top	简写属性，用于把上边框的所有属性设置到一个声明中。</li>
+          <li>border-top-color	设置元素的上边框的颜色。</li>
+          <li>border-top-style	设置元素的上边框的样式。</li>
+          <li>border-top-width	设置元素的上边框的宽度。</li>
+        </ul>
+        <div class="case-border-style">
+          <style>
+            .case-border-style {
+              width: 980px;
+              height: 400px;
+              border: hotpink dotted 1px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-wrap: wrap;
+            }
+            div[class^='border-'] {
+              width: 150px;
+              height: 150px;
+              margin: 10px;
+              position: relative;
+            }
+            div[class^='border-']::after{
+              content: attr(data-brief);
+              display: block;
+              width: 100%;
+              height: 100%;
+              line-height: 120px;
+              text-align: center;
+              position: absolute;
+              left: 0;
+              top: 0;
+              font-size: 12px;
+              background-color: rgba(170, 170, 170, 0);
+              transition: all 0.3s ease-in;
+              z-index: -1;
+            }
+            div[class^='border-']:hover::after {
+              background-color: rgba(170, 170, 170, 0.5);
+              z-index: 100;
+            }
+          </style>
+          <div class="border-dotted" data-brief="dotted 定义点状边框">
+            <style>
+              .border-dotted {
+                border: #0ff dotted 12px;
+              }
+            </style>
+          </div>
+          <div class="border-dashed" data-brief="dashed 定义虚线">
+            <style>
+              .border-dashed {
+                border: #0ff dashed 12px;
+              }
+            </style>
+          </div>
+          <div class="border-groove" data-brief="groove 3D凹槽边框">
+            <style>
+              .border-groove {
+                border: #0ff groove 12px;
+              }
+            </style>
+          </div>
+          <div class="border-ridge" data-brief="ridge 3D垄状边框">
+            <style>
+              .border-ridge {
+                border: #0ff ridge  12px;
+              }
+            </style>
+          </div>
+          <div class="border-solid" data-brief="solid 实线">
+            <style>
+              .border-solid {
+                border: #0ff solid 12px;
+              }
+            </style>
+          </div>
+          <div class="border-double" data-brief="double 双线">
+            <style>
+              .border-double  {
+                border: #0ff double 12px;
+              }
+            </style>
+          </div>
+          <div class="border-inset" data-brief="inset 3D inset边框">
+            <style>
+              .border-inset {
+                border: #0ff inset 12px;
+              }
+            </style>
+          </div>
+          <div class="border-outset" data-brief="outset 3D outset边框">
+            <style>
+              .border-outset {
+                border: #0ff outset 12px;
+              }
+            </style>
+          </div>
+        </div>        
+      </div>
+    </section>   
+    <section>
+      <header>边框圆角</header>
+      <div class="wrap-box">
+        <h4>概念</h4>
+        <p>圆角处理时，脑中要形成圆、圆心、长半径、短半径的概念，正圆是椭圆的一种特殊情况。</p>
+        <img src="./images/border.png" alt="border">
+        <p>可分别设置长、短半径，以“/”进行分隔，遵循“1，2，3，4”规则，“/”前面的1~4个用来设置横轴半径（分别对应横轴1、2、3、4位置 ），“/”后面1~4个参数用来设置纵轴半径（分别对应纵轴1、2、3、4位置 ）</p>
+        <img src="./images/border2.png" alt="border">
+        <p>当圆角半径小于或等于边框宽度时，元素内角是直角</p>
+      </div>
+    </section>
+    <section>
+      <header>边框图片</header>
+      <div class="wrap-box">   
+        <h4>语法</h4>     
+        <xmp>
+          border-image：<border-image-source> || <border-image-slice> [ / <border-image-width>? [ / <border-image-outset> ]? ]? 
+          || <border-image-repeat></border-image-repeat>
+        </xmp>
+        <ul>
+          <li>
+            border-image-source : none | &lt;url&gt;
+            <ul>
+              <li>默认值：none</li>
+              <li>该属性用于指定是否用图像定义边框样式或图像来源路径。</li>
+            </ul>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <b>border-image-slice : [ &lt;number&gt; | &lt;percentage&gt; ]{1,4} && fill?</b>            
+            <ul>
+              <li>默认值：100%</li>
+              <li>该属性用于指定对边框背景图的分割方式,指定图像的边界向内偏移。</li>
+              <li>写本文档时尚无浏览器支持参数值 fill 关键字</li>
+              <li>此属性指定顶部，右，底部，左边缘的图像向内偏移，分为九个区域：四个角，四边和中间。图像中间部分将被丢弃（完全透明的处理），除非填写关键字。
+                如果省略第四个数字/百分比，它和第二个相同的。如果也省略了第三个，它和第一个是相同的。如果也省略了第二个，它和第一个是相同的。</li>
+            </ul>
+            <p>
+              设置的图片将会被“切割”成九宫格形式，然后进行设置。如下图“切割”完成后生成虚拟的9块图形，然后按对应位置设置背景，
+              其中四个角位置、形状保持不变，中心位置水平垂直两个方向平铺。如下图:
+            </p>
+            <img src="./images/border-slice.png" width="850px" alt="border slice">
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <b>border-image-repeat : [ stretch | repeat | round | space ]{1,2}</b>
+            <ul>
+              <li>默认值：stretch
+                <ul>
+                  <li>stretch	默认值。拉伸图像来填充区域</li>
+                  <li>repeat 单纯平铺多余部分，会被“裁切”而不显示。</li>
+                  <img src="./images/border-repeat-repeat.png" alt="border-repeat-repeat">
+                  <li>round 会自动调整尺寸，完整显示边框图片。</li>
+                  <img src="./images/border-repeat-round.png" alt="border-repeat-round.png">                                    
+                  <li>space	类似 repeat 值。如果无法完整平铺所有图像，扩展空间会分布在图像周围</li>
+                </ul>
+              </li>
+              <li>用于图像边界是否应重复（repeated）、拉伸（stretched）或铺满（rounded）。</li>
+              <li>该属性用于指定边框背景图的填充方式。可定义0-2个参数值，即水平和垂直方向。如果2个值相同，可合并成1个，表示水平和垂直方向都用相同的方式填充边框背景图；如果2个值都为stretch，则可省略不写。</li>
+              <li>写本文档时Opera尚不支持该属性，但却默认使用了stretch的效果</li>
+            </ul>
+          </li>
+        </ul>
+        <h4>一个例子</h4>
+        <p>
+          根据图示，切割完 border 的背景切片后，并且也已经设置了 border 的宽度（重要）。将相应的切片填充到 border 的相应位置。
+          需要注意的是：不论 border 的宽度设置的多大，后面切割的参数都是根据 border-image 引入图片的尺寸设置的参数, 或者说是根据引入图片大小设置的切割参数。
+          切割后的四周的八个切片，四个角根据 border 设置的大小全尺寸自动缩放显示到 border 对应的四个角。除四个角外的其他中间切片（上中，右中间，下中，左中间），
+          可以根据设置做拉伸或重复的设置操作显示到对应的 border 位置。
+        </p>
+        <img src="./images/border-image.gif" width="500px" alt="border slice">
+      </div>
+    </section>
+    <section>
+      <header>边框阴影</header>
+      <div class="wrap-box">
+        <h4>语法</h4>
+        <p>
+          box-shadow: h-shadow v-shadow blur spread color inset;
+        </p>
+        <p>
+          boxShadow 属性把一个或多个下拉阴影添加到框上。该属性是一个用逗号分隔阴影的列表，
+          每个阴影由 2-4 个长度值、一个可选的颜色值和一个可选的 inset 关键字来规定。省略长度的值是 0。
+        </p>
+        <ul>
+          <li>h-shadow	必需的。水平阴影的位置。允许负值。水平偏移量 正值向右 负值向左</li>
+          <li>v-shadow	必需的。垂直阴影的位置。允许负值。垂直正值向下 负值向上。</li>
+          <li>blur	可选。模糊距离。（从一个颜色值在一定距离内进行一个渐变至透明的过程），模糊度是不能为负</li>
+          <li>spread	可选。阴影的大小</li>
+          <li>color	可选。阴影的颜色。在CSS颜色值寻找颜色值的完整列表</li>
+          <li>inset	可选。从外层的阴影（开始时）改变阴影内侧阴影</li>         
+        </ul>
+        <h4 style="color: red;">说明：</h4>
+        <ul>
+          <li>偏移量和阴影扩展也是数学运算的，即正负会相互抵消。</li>
+          <li>偏移量和模糊度是可以相加计算，偏移量负号只代表方向。</li>
+          <li>设置边框阴影不会影响盒子的布局，即不会影响其兄弟元素的布局。</li>
+          <li>spread可以与blur、h-shadow、v-shadow相互抵消，blur不可为负值</li>
+          <li>可以设置多重边框阴影，实现更好的效果，增强立体感。</li>
+        </ul>
+        <img src="./images/box-shadow.png" alt="box-shadow">
+        <xmp>
+          div {
+            width: 150px;
+            height: 150px;
+            background-color: #fff;
+            
+            box-shadow: 120px 80px 40px 20px #0ff;
+            /* 顺序为: offset-x, offset-y, blur-size, spread-size, color */
+            /* blur-size 和 spread-size 是可选的 (默认为 0) */
+          }
+        </xmp>
+        <div class="case1">
+          <div class="box"></div>          
+        </div>
+        <img src="./images/box-shadow2.png" alt="box-shadow">
+      </div>
+    </section>
+    <section>
+      <header>导航</header>
+      <div class="wrap-box">
+        <ul>
+          <li><a href="./index.html">CSS-介绍</a></li>
+          <li><a href="./01-selector.html">CSS3-选择器</a></li>
+        </ul>
+      </div>
+    </section>
+	</div>
+</body>
+<script>
+// function foo() {
+//     console.log(a);
+//     a = 1;
+// }
+
+// foo(); // ???
+
+function bar() {
+    a = 1;
+    console.log(a);
+}
+bar(); // ???
+</script>
+</html>

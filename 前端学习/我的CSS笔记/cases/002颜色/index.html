@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <title>CSS3-颜色</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <style>
+    .case {
+      width: 400px;
+      height: 250px;
+      background-color: seagreen;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .case1 .layer {
+      position: absolute;
+      width: 360px;
+      height: 200px;
+      background: rgba(25, 28, 29, .3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }    
+    .case .layer-content {
+      width: 200px;
+      height: 130px;
+      background: red;  
+      text-align: center;    
+    }
+    .case2 .layer {
+      position: absolute;
+      width: 360px;
+      height: 200px;
+      background: rgb(25, 28, 29);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <a href="#top" class="go-top">Top</a>
+  <div id="top"></div>
+	<div class="wrapper">
+		<header>CSS3-颜色</header>
+		<section>
+			<header>简介</header>
+			<div class="wrap-box">
+        <p>
+          CSS3新增了RGBA、HSLA模式，其中的A 表示透明度通道，即可以设置颜色值的透明度，相较opacity，不具有继承性，即不会影响子元素的透明度。
+        </p>
+        <ul>
+          <ol>
+            <li><b>RGBA方式三原色配色方式(Red、Green、Blue、Alpha)</b></li>
+              <ul>
+                <li>在RGB模式上新增了Alpha透明度。</li>
+                <li>R、G、B 取值范围0~255</li>
+              </ul>
+              <img src="./images/rgb-color-wheel-lg.jpg" alt="rgb">
+            <li><b>HSL模式</b></li>
+              <ul>
+                <li>语法:HSL(H,S,L)，HSL分别表示色调，饱和度，亮度</li>
+                  <ul>
+                    <li>H:0(或360)表示红色，120表示绿色，240表示蓝色，也可取其他数值来指定颜色。取值为：0 - 360 </li>
+                    <li>S:(饱和度)。取值为：0.0% - 100.0%</li>
+                    <li>L:(亮度)。取值为：0.0% - 100.0%</li>
+                  </ul>
+              </ul>
+              <img src="./images/hsl-color-wheel.png" alt="hsl">
+            <li><b>HSLA模式(Hue、Saturation、Lightness、Alpha)</b></li>
+              <ul>
+                <li>HSL模式上新增了Alpha透明度。</li>
+              </ul>
+            <li><b>关于透明度：</b></li>
+            <ul>
+              <li>opacity子元素会继承父元素的透明度，在实际开发中会带来干扰；</li>
+              <li>transparent 设置透明度时完全类似于“玻璃”一样的透明； </li>
+            </ul>
+          </ol>
+        </ul>
+			</div>
+    </section>
+    <section>
+      <header>练习案例-实现模态层效果</header>
+      <div class="wrap-box">
+        <h4>效果展示</h4>
+        <div class="case case1">
+          <div class="layer">
+            我是模态框
+            <div class="layer-content">我是弹出框</div>
+          </div>
+        </div>
+        <details>
+          <summary>代码</summary>
+          <xmp>
+              <style>
+                .case {
+                  width: 400px;
+                  height: 250px;
+                  background-color: seagreen;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                }
+                .case1 .layer {
+                  position: absolute;
+                  width: 360px;
+                  height: 200px;
+                  background: rgba(25, 28, 29, .3);
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                }    
+                .case .layer-content {
+                  width: 200px;
+                  height: 130px;
+                  background: red;  
+                  text-align: center;    
+                }
+              </style>
+              <div class="case case1">
+                <div class="layer">
+                  我是模态框
+                  <div class="layer-content">我是弹出框</div>
+                </div>
+              </div>
+          </xmp>
+        </details>
+      </div>
+    </section>
+    <section>
+      <header>练习案例-opacity属性的继承性</header>
+      <div class="wrap-box">
+        <h4>效果展示</h4>
+        <p>弹出框继承了父元素的opacity属性</p>
+        <div class="case case2">
+          <div class="layer">
+            我是模态框
+            <div class="layer-content">我是弹出框</div>
+          </div>
+        </div>
+        <details>
+          <summary>代码</summary>
+          <xmp>            
+              <style>
+                .case {
+                  width: 400px;
+                  height: 250px;
+                  background-color: seagreen;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                }                
+                .case .layer-content {
+                  width: 200px;
+                  height: 130px;
+                  background: red;  
+                  text-align: center;    
+                }
+                .case2 .layer {
+                  position: absolute;
+                  width: 360px;
+                  height: 200px;
+                  background: rgb(25, 28, 29);
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  opacity: 0.5;
+                }
+              </style>
+              <div class="case case2">
+                <div class="layer">
+                  我是模态框
+                  <div class="layer-content">我是弹出框</div>
+                </div>
+              </div>
+          </xmp>
+        </details>
+      </div>
+    </section>
+    <section>
+      <header>导航</header>
+      <div class="wrap-box">
+        <ul>
+          <li><a href="../001选择器/index.html">CSS-介绍</a></li>
+          <li><a href="../001选择器/01-selector.html">CSS3-选择器</a></li>
+          <li><a href="../001选择器/selector-cases.html">CSS3-选择器练习案例</a></li>
+        </ul>
+      </div>
+    </section>
+	</div>
+</body>
+</html>

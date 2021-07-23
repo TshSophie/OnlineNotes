@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <title>CSS3-选择器练习案例</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <style>
+    .case-nthChild p:nth-child(2){
+      background:#ff0000;
+    }
+
+    .case-nthoFType p:nth-of-type(2)
+    {
+      background:#ff0000;
+    }
+
+    .calendar {
+			width: 385px;
+			height: 312px;
+			padding: 48px 141px 10px 12px;
+			margin: 100px auto;
+			/* background: url(./images/bg.jpg) 0 0 no-repeat; */
+		}
+
+		.calendar dt, .calendar dd {
+			overflow: hidden;
+		}
+
+		.calendar span {
+			display: block;
+			width: 48px;
+			height: 48px;
+			text-align: center;
+			margin-right: 1px;
+			border: 3px solid transparent;
+			float: left;
+		}
+
+		.calendar dt {
+			border-top: 1px solid #5CADFF;
+		}
+
+		.calendar dt span {
+			height: 28px;
+			line-height: 34px;
+			font-size: 14px;
+		}
+
+		.calendar dd {
+			border-top: 1px solid #c8cacc;
+      cursor: pointer;
+      margin: 0;
+		}
+
+		.calendar span > b,
+		.calendar span > b {
+			display: block;
+			line-height: 1;
+		}
+
+		.calendar span > b {
+			height: 26px;
+			line-height: 30px;
+			font-size: 18px;
+			font-family: Arial;
+			font-weight: normal;
+		}
+
+		.calendar span > i {
+			color: #999;
+			font-size: 12px;
+			font-style: normal;
+    }
+    
+    .calendar span[data-range="next-month"] {
+      color: #999;
+    }
+    
+    /* 日历-标记第二个日 */
+    .calendar-case1 dd:first-of-type span:nth-of-type(2),
+    .calendar-case1 dd:first-of-type span:nth-of-type(2) i{
+      background-color:#f78817;
+      color: white;
+    }
+
+    /* 日历-标记所有周末日 */
+    .calendar-case2 span:nth-of-type(6n),
+    .calendar-case2 span:nth-of-type(7n)
+    {
+      color: red;
+    }
+    .calendar span[data-range="next-month"] {
+      color: #999;
+    }
+
+    /* 日历-标记第4行第2个日 */
+    .calendar-case3 dd:nth-of-type(4) span:nth-of-type(2) i{
+      color: red;
+    }
+
+    /* 日历-标记属性data-flag的值为festival的日子 */
+    .calendar-case4 span[data-flag="festival"] i{
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <a href="#top" class="go-top">Top</a>
+  <div id="top"></div>
+	<div class="wrapper">
+		<header>CSS3-选择器练习案例</header>
+		<section>
+			<header>E:nth-child(n)</header>
+			<div class="wrap-box">
+        <h4>描述</h4>
+        <p>	选择属于其父元素的第n个子元素的每个 E 元素。</p> 
+        <h4>代码示例</h4>
+        <p>指定每个 p 元素匹配的父元素中第 2 个子元素的背景色：</p>
+        <xmp>
+          <style>
+            .case-nthChild h1:nth-child(2){
+              background:#ff0000;
+            }
+          </style>
+          <div class="case-nthChild">
+            <h1>这是一个标题</h1>
+            <p>这是第一个段落。</p>
+            <p>这是第二个段落。</p>
+            <p>这是第三个段落。</p>
+            <p>这是第四个段落。</p>
+          </div>
+        </xmp>
+        <h4>代码效果</h4>
+        <div class="case-nthChild">
+          <h1>这是一个标题</h1>
+          <p>这是第一个段落。</p>
+          <p>这是第二个段落。</p>
+          <p>这是第三个段落。</p>
+          <p>这是第四个段落。</p>
+        </div>
+			</div>
+		</section>
+		<section>
+			<header>E:nth-of-type(n)</header>
+			<div class="wrap-box">
+        <h4>描述</h4>
+        <p>	选择属于其父元素第n个 E 元素的每个 E 元素。</p> 
+        <h4>代码示例</h4>
+        <p>指定每个p元素匹配同类型中的第2个同级兄弟元素的背景色：</p>
+        <xmp>
+          .case-nthoFType p:nth-of-type(2)
+          {
+            background:#ff0000;
+          }
+          <div class="case-nthoFType">
+            <h1>这是一个标题</h1>
+            <p>这是第一个段落。</p>
+            <p>这是第二个段落。</p>
+            <p>这是第三个段落。</p>
+            <p>这是第四个段落。</p>
+          </div>
+        </xmp>
+        <h4>代码效果</h4>
+        <div class="case-nthoFType">
+          <h1>这是一个标题</h1>
+          <div>我是div.............</div>
+          <p>这是第一个段落。</p>
+          <p>这是第二个段落。</p>
+          <p>这是第三个段落。</p>
+          <p>这是第四个段落。</p>
+        </div>
+			</div>
+		</section>
+    <section>
+      <header>日历-HTML</header>
+      <div class="wrap-box">
+        <div class="calendar">
+          <dl>
+            <dt>
+              <span>一</span>
+              <span>二</span>
+              <span>三</span>
+              <span>四</span>
+              <span>五</span>
+              <span>六</span>
+              <span>日</span>
+            </dt>
+            <dd>
+              <span data-range="prev-month">
+                <b>30</b>
+                <i>十九</i>
+              </span>
+              <span class="today">
+                <b>1</b>
+                <i>艾滋病日</i>
+              </span>
+              <span>
+                <b>2</b>
+                <i>廿一</i>
+              </span>
+              <span>
+                <b>3</b>
+                <i>廿二</i>
+              </span>
+              <span>
+                <b>4</b>
+                <i>廿三</i>
+              </span>
+              <span>
+                <b>5</b>
+                <i>廿四</i>
+              </span>
+              <span>
+                <b>6</b>
+                <i>廿五</i>
+              </span>
+            </dd>
+            <dd>
+              <span data-flag="festival">
+                <b>7</b>
+                <i>廿六</i>
+              </span>
+              <span>
+                <b>8</b>
+                <i>廿七</i>
+              </span>
+              <span>
+                <b>9</b>
+                <i>廿八</i>
+              </span>
+              <span>
+                <b>10</b>
+                <i>廿九</i>
+              </span>
+              <span>
+                <b>11</b>
+                <i>初一</i>
+              </span>
+              <span>
+                <b>12</b>
+                <i>初二</i>
+                </span>
+              <span>
+                <b>13</b>
+                <i>初三</i>
+              </span>
+            </dd>
+            <dd>
+              <span>
+                <b>14</b>
+                <i>初四</i>
+              </span>
+              <span>
+                <b>15</b>
+                <i>初五</i>
+              </span>
+              <span>
+                <b>16</b>
+                <i>初六</i>
+              </span>
+              <span>
+                <b>17</b>
+                <i>初七</i>
+              </span>
+              <span>
+                <b>18</b>
+                <i>初八</i>
+              </span>
+              <span>
+                <b>19</b>
+                <i>初九</i>
+              </span>
+              <span>
+      
+                <b>20</b>
+                <i>初十</i></span>
+            </dd>
+            <dd>
+              <span>
+                <b>21</b>
+                <i>十一</i>
+              </span>
+              <span data-flag="festival">
+                <b>22</b>
+                <i>十二</i>
+              </span>
+              <span>
+                <b>23</b>
+                <i>十三</i>
+              </span>
+              <span>
+                <b>24</b>
+                <i>十四</i>
+              </span>
+              <span>
+                <b>25</b>
+                <i>十五</i>
+              </span>
+              <span>
+                <b>26</b>
+                <i>十六</i>
+              </span>
+              <span>
+                <b>27</b>
+                <i>十七</i>
+              </span>
+            </dd>
+            <dd>
+              <span>
+                <b>28</b>
+                <i>十八</i>
+              </span>
+              <span>
+                <b>29</b>
+                <i>十九</i>
+              </span>
+              <span>
+                <b>30</b>
+                <i>二十</i>
+              </span>
+              <span>
+                <b>31</b>
+                <i>廿一</i>
+              </span>
+              <span data-range="next-month">
+                <b>1</b>
+                <i>元旦</i>
+              </span>
+              <span data-range="next-month">
+                <b>2</b>
+                <i>廿三</i>
+              </span>
+              <span data-range="next-month">
+                <b>3</b>
+                <i>廿四</i>
+              </span>
+            </dd>
+          </dl>
+        </div>
+        <details>
+          <summary>html代码</summary>
+          <xmp>
+            <style>
+              .calendar {
+                width: 385px;
+                height: 312px;
+                padding: 48px 141px 10px 12px;
+                margin: 100px auto;
+                /* background: url(./images/bg.jpg) 0 0 no-repeat; */
+              }
+  
+              .calendar dt, .calendar dd {
+                overflow: hidden;
+              }
+  
+              .calendar span {
+                display: block;
+                width: 48px;
+                height: 48px;
+                text-align: center;
+                margin-right: 1px;
+                border: 3px solid transparent;
+                float: left;
+              }
+  
+              .calendar dt {
+                border-top: 1px solid #5CADFF;
+              }
+  
+              .calendar dt span {
+                height: 28px;
+                line-height: 34px;
+                font-size: 14px;
+              }
+  
+              .calendar dd {
+                border-top: 1px solid #c8cacc;
+                cursor: pointer;
+                margin: 0;
+              }
+  
+              .calendar span > b,
+              .calendar span > b {
+                display: block;
+                line-height: 1;
+              }
+  
+              .calendar span > b {
+                height: 26px;
+                line-height: 30px;
+                font-size: 18px;
+                font-family: Arial;
+                font-weight: normal;
+              }
+  
+              .calendar span > i {
+                color: #999;
+                font-size: 12px;
+                font-style: normal;
+              }
+              .calendar span[data-range="next-month"] {
+                color: #999;
+              }
+            </style>
+            <div class="calendar">
+              <dl>
+                <dt>
+                  <span>一</span>
+                  <span>二</span>
+                  <span>三</span>
+                  <span>四</span>
+                  <span>五</span>
+                  <span>六</span>
+                  <span>日</span>
+                </dt>
+                <dd>
+                  <span data-range="prev-month">
+                    <b>30</b>
+                    <i>十九</i>
+                  </span>
+                  <span class="today">
+                    <b>1</b>
+                    <i>艾滋病日</i>
+                  </span>
+                  <span>
+                    <b>2</b>
+                    <i>廿一</i>
+                  </span>
+                  <span>
+                    <b>3</b>
+                    <i>廿二</i>
+                  </span>
+                  <span>
+                    <b>4</b>
+                    <i>廿三</i>
+                  </span>
+                  <span>
+                    <b>5</b>
+                    <i>廿四</i>
+                  </span>
+                  <span>
+                    <b>6</b>
+                    <i>廿五</i>
+                  </span>
+                </dd>
+                <dd>
+                  <span data-flag="festival">
+                    <b>7</b>
+                    <i>廿六</i>
+                  </span>
+                  <span>
+                    <b>8</b>
+                    <i>廿七</i>
+                  </span>
+                  <span>
+                    <b>9</b>
+                    <i>廿八</i>
+                  </span>
+                  <span>
+                    <b>10</b>
+                    <i>廿九</i>
+                  </span>
+                  <span>
+                    <b>11</b>
+                    <i>初一</i>
+                  </span>
+                  <span>
+                    <b>12</b>
+                    <i>初二</i>
+                    </span>
+                  <span>
+                    <b>13</b>
+                    <i>初三</i>
+                  </span>
+                </dd>
+                <dd>
+                  <span>
+                    <b>14</b>
+                    <i>初四</i>
+                  </span>
+                  <span>
+                    <b>15</b>
+                    <i>初五</i>
+                  </span>
+                  <span>
+                    <b>16</b>
+                    <i>初六</i>
+                  </span>
+                  <span>
+                    <b>17</b>
+                    <i>初七</i>
+                  </span>
+                  <span>
+                    <b>18</b>
+                    <i>初八</i>
+                  </span>
+                  <span>
+                    <b>19</b>
+                    <i>初九</i>
+                  </span>
+                  <span>
+          
+                    <b>20</b>
+                    <i>初十</i></span>
+                </dd>
+                <dd>
+                  <span>
+                    <b>21</b>
+                    <i>十一</i>
+                  </span>
+                  <span data-flag="festival">
+                    <b>22</b>
+                    <i>十二</i>
+                  </span>
+                  <span>
+                    <b>23</b>
+                    <i>十三</i>
+                  </span>
+                  <span>
+                    <b>24</b>
+                    <i>十四</i>
+                  </span>
+                  <span>
+                    <b>25</b>
+                    <i>十五</i>
+                  </span>
+                  <span>
+                    <b>26</b>
+                    <i>十六</i>
+                  </span>
+                  <span>
+                    <b>27</b>
+                    <i>十七</i>
+                  </span>
+                </dd>
+                <dd>
+                  <span>
+                    <b>28</b>
+                    <i>十八</i>
+                  </span>
+                  <span>
+                    <b>29</b>
+                    <i>十九</i>
+                  </span>
+                  <span>
+                    <b>30</b>
+                    <i>二十</i>
+                  </span>
+                  <span>
+                    <b>31</b>
+                    <i>廿一</i>
+                  </span>
+                  <span data-range="next-month">
+                    <b>1</b>
+                    <i>元旦</i>
+                  </span>
+                  <span data-range="next-month">
+                    <b>2</b>
+                    <i>廿三</i>
+                  </span>
+                  <span data-range="next-month">
+                    <b>3</b>
+                    <i>廿四</i>
+                  </span>
+                </dd>
+              </dl>
+            </div>
+          </xmp>
+        </details>        
+      </div>
+    </section>
+    <section>
+      <header>日历-标记第二个日</header>
+      <div class="wrap-box">
+        <div class="calendar calendar-case1">
+          <dl>
+            <dt>
+              <span>一</span>
+              <span>二</span>
+              <span>三</span>
+              <span>四</span>
+              <span>五</span>
+              <span>六</span>
+              <span>日</span>
+            </dt>
+            <dd>
+              <span data-range="prev-month">
+                <b>30</b>
+                <i>十九</i>
+              </span>
+              <span class="today">
+                <b>1</b>
+                <i>艾滋病日</i>
+              </span>
+              <span>
+                <b>2</b>
+                <i>廿一</i>
+              </span>
+              <span>
+                <b>3</b>
+                <i>廿二</i>
+              </span>
+              <span>
+                <b>4</b>
+                <i>廿三</i>
+              </span>
+              <span>
+                <b>5</b>
+                <i>廿四</i>
+              </span>
+              <span>
+                <b>6</b>
+                <i>廿五</i>
+              </span>
+            </dd>
+            <dd>
+              <span data-flag="festival">
+                <b>7</b>
+                <i>廿六</i>
+              </span>
+              <span>
+                <b>8</b>
+                <i>廿七</i>
+              </span>
+              <span>
+                <b>9</b>
+                <i>廿八</i>
+              </span>
+              <span>
+                <b>10</b>
+                <i>廿九</i>
+              </span>
+              <span>
+                <b>11</b>
+                <i>初一</i>
+              </span>
+              <span>
+                <b>12</b>
+                <i>初二</i>
+                </span>
+              <span>
+                <b>13</b>
+                <i>初三</i>
+              </span>
+            </dd>
+            <dd>
+              <span>
+                <b>14</b>
+                <i>初四</i>
+              </span>
+              <span>
+                <b>15</b>
+                <i>初五</i>
+              </span>
+              <span>
+                <b>16</b>
+                <i>初六</i>
+              </span>
+              <span>
+                <b>17</b>
+                <i>初七</i>
+              </span>
+              <span>
+                <b>18</b>
+                <i>初八</i>
+              </span>
+              <span>
+                <b>19</b>
+                <i>初九</i>
+              </span>
+              <span>
+      
+                <b>20</b>
+                <i>初十</i></span>
+            </dd>
+            <dd>
+              <span>
+                <b>21</b>
+                <i>十一</i>
+              </span>
+              <span data-flag="festival">
+                <b>22</b>
+                <i>十二</i>
+              </span>
+              <span>
+                <b>23</b>
+                <i>十三</i>
+              </span>
+              <span>
+                <b>24</b>
+                <i>十四</i>
+              </span>
+              <span>
+                <b>25</b>
+                <i>十五</i>
+              </span>
+              <span>
+                <b>26</b>
+                <i>十六</i>
+              </span>
+              <span>
+                <b>27</b>
+                <i>十七</i>
+              </span>
+            </dd>
+            <dd>
+              <span>
+                <b>28</b>
+                <i>十八</i>
+              </span>
+              <span>
+                <b>29</b>
+                <i>十九</i>
+              </span>
+              <span>
+                <b>30</b>
+                <i>二十</i>
+              </span>
+              <span>
+                <b>31</b>
+                <i>廿一</i>
+              </span>
+              <span data-range="next-month">
+                <b>1</b>
+                <i>元旦</i>
+              </span>
+              <span data-range="next-month">
+                <b>2</b>
+                <i>廿三</i>
+              </span>
+              <span data-range="next-month">
+                <b>3</b>
+                <i>廿四</i>
+              </span>
+            </dd>
+          </dl>
+        </div>
+        <details>
+          <summary>style代码</summary>
+          <xmp>
+            <style>
+              .calendar-case1 dd:first-of-type span:nth-of-type(2),
+              .calendar-case1 dd:first-of-type span:nth-of-type(2) i{
+                background-color:#f78817;
+                color: white;
+              }
+            </style>
+          </xmp>
+        </details>
+      </div>
+    </section>
+    <section>
+      <header>日历-标记所有周末日</header>
+      <div class="wrap-box">
+        <div class="calendar calendar-case2">
+          <dl>
+            <dt>
+              <span>一</span>
+              <span>二</span>
+              <span>三</span>
+              <span>四</span>
+              <span>五</span>
+              <span>六</span>
+              <span>日</span>
+            </dt>
+            <dd>
+              <span data-range="prev-month">
+                <b>30</b>
+                <i>十九</i>
+              </span>
+              <span class="today">
+                <b>1</b>
+                <i>艾滋病日</i>
+              </span>
+              <span>
+                <b>2</b>
+                <i>廿一</i>
+              </span>
+              <span>
+                <b>3</b>
+                <i>廿二</i>
+              </span>
+              <span>
+                <b>4</b>
+                <i>廿三</i>
+              </span>
+              <span>
+                <b>5</b>
+                <i>廿四</i>
+              </span>
+              <span>
+                <b>6</b>
+                <i>廿五</i>
+              </span>
+            </dd>
+            <dd>
+              <span data-flag="festival">
+                <b>7</b>
+                <i>廿六</i>
+              </span>
+              <span>
+                <b>8</b>
+                <i>廿七</i>
+              </span>
+              <span>
+                <b>9</b>
+                <i>廿八</i>
+              </span>
+              <span>
+                <b>10</b>
+                <i>廿九</i>
+              </span>
+              <span>
+                <b>11</b>
+                <i>初一</i>
+              </span>
+              <span>
+                <b>12</b>
+                <i>初二</i>
+                </span>
+              <span>
+                <b>13</b>
+                <i>初三</i>
+              </span>
+            </dd>
+            <dd>
+              <span>
+                <b>14</b>
+                <i>初四</i>
+              </span>
+              <span>
+                <b>15</b>
+                <i>初五</i>
+              </span>
+              <span>
+                <b>16</b>
+                <i>初六</i>
+              </span>
+              <span>
+                <b>17</b>
+                <i>初七</i>
+              </span>
+              <span>
+                <b>18</b>
+                <i>初八</i>
+              </span>
+              <span>
+                <b>19</b>
+                <i>初九</i>
+              </span>
+              <span>
+      
+                <b>20</b>
+                <i>初十</i></span>
+            </dd>
+            <dd>
+              <span>
+                <b>21</b>
+                <i>十一</i>
+              </span>
+              <span data-flag="festival">
+                <b>22</b>
+                <i>十二</i>
+              </span>
+              <span>
+                <b>23</b>
+                <i>十三</i>
+              </span>
+              <span>
+                <b>24</b>
+                <i>十四</i>
+              </span>
+              <span>
+                <b>25</b>
+                <i>十五</i>
+              </span>
+              <span>
+                <b>26</b>
+                <i>十六</i>
+              </span>
+              <span>
+                <b>27</b>
+                <i>十七</i>
+              </span>
+            </dd>
+            <dd>
+              <span>
+                <b>28</b>
+                <i>十八</i>
+              </span>
+              <span>
+                <b>29</b>
+                <i>十九</i>
+              </span>
+              <span>
+                <b>30</b>
+                <i>二十</i>
+              </span>
+              <span>
+                <b>31</b>
+                <i>廿一</i>
+              </span>
+              <span data-range="next-month">
+                <b>1</b>
+                <i>元旦</i>
+              </span>
+              <span data-range="next-month">
+                <b>2</b>
+                <i>廿三</i>
+              </span>
+              <span data-range="next-month">
+                <b>3</b>
+                <i>廿四</i>
+              </span>
+            </dd>
+          </dl>
+        </div>
+        <details>
+          <summary>style代码</summary>
+          <xmp>
+            <style>
+              .calendar-case2 span:nth-of-type(6n),
+              .calendar-case2 span:nth-of-type(7n)
+              {
+                color: red;
+              }
+              .calendar span[data-range="next-month"] {
+                color: #999;
+              }
+            </style>
+          </xmp>
+        </details>
+      </div>
+    </section>
+    <section>
+      <header>日历-标记第4行第2个日</header>
+      <div class="wrap-box">
+        <div class="calendar calendar-case3">
+          <dl>
+            <dt>
+              <span>一</span>
+              <span>二</span>
+              <span>三</span>
+              <span>四</span>
+              <span>五</span>
+              <span>六</span>
+              <span>日</span>
+            </dt>
+            <dd>
+              <span data-range="prev-month">
+                <b>30</b>
+                <i>十九</i>
+              </span>
+              <span class="today">
+                <b>1</b>
+                <i>艾滋病日</i>
+              </span>
+              <span>
+                <b>2</b>
+                <i>廿一</i>
+              </span>
+              <span>
+                <b>3</b>
+                <i>廿二</i>
+              </span>
+              <span>
+                <b>4</b>
+                <i>廿三</i>
+              </span>
+              <span>
+                <b>5</b>
+                <i>廿四</i>
+              </span>
+              <span>
+                <b>6</b>
+                <i>廿五</i>
+              </span>
+            </dd>
+            <dd>
+              <span data-flag="festival">
+                <b>7</b>
+                <i>廿六</i>
+              </span>
+              <span>
+                <b>8</b>
+                <i>廿七</i>
+              </span>
+              <span>
+                <b>9</b>
+                <i>廿八</i>
+              </span>
+              <span>
+                <b>10</b>
+                <i>廿九</i>
+              </span>
+              <span>
+                <b>11</b>
+                <i>初一</i>
+              </span>
+              <span>
+                <b>12</b>
+                <i>初二</i>
+                </span>
+              <span>
+                <b>13</b>
+                <i>初三</i>
+              </span>
+            </dd>
+            <dd>
+              <span>
+                <b>14</b>
+                <i>初四</i>
+              </span>
+              <span>
+                <b>15</b>
+                <i>初五</i>
+              </span>
+              <span>
+                <b>16</b>
+                <i>初六</i>
+              </span>
+              <span>
+                <b>17</b>
+                <i>初七</i>
+              </span>
+              <span>
+                <b>18</b>
+                <i>初八</i>
+              </span>
+              <span>
+                <b>19</b>
+                <i>初九</i>
+              </span>
+              <span>
+      
+                <b>20</b>
+                <i>初十</i></span>
+            </dd>
+            <dd>
+              <span>
+                <b>21</b>
+                <i>十一</i>
+              </span>
+              <span data-flag="festival">
+                <b>22</b>
+                <i>十二</i>
+              </span>
+              <span>
+                <b>23</b>
+                <i>十三</i>
+              </span>
+              <span>
+                <b>24</b>
+                <i>十四</i>
+              </span>
+              <span>
+                <b>25</b>
+                <i>十五</i>
+              </span>
+              <span>
+                <b>26</b>
+                <i>十六</i>
+              </span>
+              <span>
+                <b>27</b>
+                <i>十七</i>
+              </span>
+            </dd>
+            <dd>
+              <span>
+                <b>28</b>
+                <i>十八</i>
+              </span>
+              <span>
+                <b>29</b>
+                <i>十九</i>
+              </span>
+              <span>
+                <b>30</b>
+                <i>二十</i>
+              </span>
+              <span>
+                <b>31</b>
+                <i>廿一</i>
+              </span>
+              <span data-range="next-month">
+                <b>1</b>
+                <i>元旦</i>
+              </span>
+              <span data-range="next-month">
+                <b>2</b>
+                <i>廿三</i>
+              </span>
+              <span data-range="next-month">
+                <b>3</b>
+                <i>廿四</i>
+              </span>
+            </dd>
+          </dl>
+        </div>
+        <details>
+          <summary>style代码</summary>
+          <xmp>
+            <style>
+              .calendar-case3 dd:nth-of-type(4) span:nth-of-type(2) i{
+                color: red;
+              }
+            </style>
+          </xmp>
+        </details>
+      </div>
+    </section>
+    <section>
+      <header>日历-标记属性data-flag的值为festival的日子</header>
+      <div class="wrap-box">
+        <div class="calendar calendar-case4">
+          <dl>
+            <dt>
+              <span>一</span>
+              <span>二</span>
+              <span>三</span>
+              <span>四</span>
+              <span>五</span>
+              <span>六</span>
+              <span>日</span>
+            </dt>
+            <dd>
+              <span data-range="prev-month">
+                <b>30</b>
+                <i>十九</i>
+              </span>
+              <span class="today">
+                <b>1</b>
+                <i>艾滋病日</i>
+              </span>
+              <span>
+                <b>2</b>
+                <i>廿一</i>
+              </span>
+              <span>
+                <b>3</b>
+                <i>廿二</i>
+              </span>
+              <span>
+                <b>4</b>
+                <i>廿三</i>
+              </span>
+              <span>
+                <b>5</b>
+                <i>廿四</i>
+              </span>
+              <span>
+                <b>6</b>
+                <i>廿五</i>
+              </span>
+            </dd>
+            <dd>
+              <span data-flag="festival">
+                <b>7</b>
+                <i>廿六</i>
+              </span>
+              <span>
+                <b>8</b>
+                <i>廿七</i>
+              </span>
+              <span>
+                <b>9</b>
+                <i>廿八</i>
+              </span>
+              <span>
+                <b>10</b>
+                <i>廿九</i>
+              </span>
+              <span>
+                <b>11</b>
+                <i>初一</i>
+              </span>
+              <span>
+                <b>12</b>
+                <i>初二</i>
+                </span>
+              <span>
+                <b>13</b>
+                <i>初三</i>
+              </span>
+            </dd>
+            <dd>
+              <span>
+                <b>14</b>
+                <i>初四</i>
+              </span>
+              <span>
+                <b>15</b>
+                <i>初五</i>
+              </span>
+              <span>
+                <b>16</b>
+                <i>初六</i>
+              </span>
+              <span>
+                <b>17</b>
+                <i>初七</i>
+              </span>
+              <span>
+                <b>18</b>
+                <i>初八</i>
+              </span>
+              <span>
+                <b>19</b>
+                <i>初九</i>
+              </span>
+              <span>
+      
+                <b>20</b>
+                <i>初十</i></span>
+            </dd>
+            <dd>
+              <span>
+                <b>21</b>
+                <i>十一</i>
+              </span>
+              <span data-flag="festival">
+                <b>22</b>
+                <i>十二</i>
+              </span>
+              <span>
+                <b>23</b>
+                <i>十三</i>
+              </span>
+              <span>
+                <b>24</b>
+                <i>十四</i>
+              </span>
+              <span>
+                <b>25</b>
+                <i>十五</i>
+              </span>
+              <span>
+                <b>26</b>
+                <i>十六</i>
+              </span>
+              <span>
+                <b>27</b>
+                <i>十七</i>
+              </span>
+            </dd>
+            <dd>
+              <span>
+                <b>28</b>
+                <i>十八</i>
+              </span>
+              <span>
+                <b>29</b>
+                <i>十九</i>
+              </span>
+              <span>
+                <b>30</b>
+                <i>二十</i>
+              </span>
+              <span>
+                <b>31</b>
+                <i>廿一</i>
+              </span>
+              <span data-range="next-month">
+                <b>1</b>
+                <i>元旦</i>
+              </span>
+              <span data-range="next-month">
+                <b>2</b>
+                <i>廿三</i>
+              </span>
+              <span data-range="next-month">
+                <b>3</b>
+                <i>廿四</i>
+              </span>
+            </dd>
+          </dl>
+        </div>
+        <details>
+          <summary>style代码</summary>
+          <xmp>
+            <style>
+              .calendar-case4 span[data-flag="festival"] i{
+                color: red;
+              }
+            </style>
+          </xmp>
+        </details>
+      </div>
+    </section>
+    <section>
+      <header>导航</header>
+      <div class="wrap-box">
+        <ul>
+          <li><a href="./index.html">CSS-介绍</a></li>
+          <li><a href="./01-selector.html">CSS3-选择器</a></li>
+        </ul>
+      </div>
+    </section>
+	</div>
+</body>
+</html>

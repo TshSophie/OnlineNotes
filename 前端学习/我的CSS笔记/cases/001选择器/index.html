@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <title>CSS-介绍</title>
+  <link rel="stylesheet" href="../css/base.css">	
+</head>
+<body>
+  <a href="#top" class="go-top">Top</a>
+  <div id="top"></div>
+	<div class="wrapper">
+		<header>CSS-介绍</header>
+		<section>
+			<header>简介</header>
+			<div class="wrap-box">
+        <h4>什么是选择器?</h4>
+	      <p>	当我们定义一条样式时候，这条样式会作用于网页当中的某些元素，所谓选择器就是样式作用的对象.</p> 
+			</div>
+		</section>
+		<section>
+			<header>插入样式的三种方法</header>
+			<div class="wrap-box">
+				<ul>
+          <ol>
+            <li>内联样式表（行内）</li>
+            <p>
+              如：
+              <xmp>
+                <p style="color: red;">我是内容</p>
+              </xmp>
+            </p>
+            <li>内部样式表（style中）</li>
+            <p>
+              如：
+              <xmp>
+                <head>                  
+                  <title>内部样式表</title>
+                  <style>
+                    p {
+                      color: red;
+                    }
+                  </style>
+                </head>
+              </xmp>
+            </p>
+            <li>外部样式表</li>
+              <ul>
+                <li>创建一个外部样式表</li>
+                <li>在head中使用link元素插入样式表</li>
+                <p>
+                  如：
+                  <xmp>
+                    <head>                      
+                      <link rel="stylesheet" href="style.css">
+                      <title>外部样式表</title>
+                    </head>
+                  </xmp>                    
+                </p>
+              </ul>
+          </ol>
+        </ul>
+			</div>
+		</section>
+		<section>
+			<header>CSS语法</header>
+			<div class="wrap-box">
+        <ul>
+          <li>单一元素的多个属性之间用分号隔开；若只有一个可以省略</li>
+          <p>
+            如：
+            <xmp>
+              /* 多个属性之间用分号隔开 */
+              div {
+                color: red;
+                background-color: blue;
+              }
+              /* 若只有一个属性可以省略分号 */
+              p {
+                color: red
+              }
+            </xmp>
+          </p>
+          <li>多个元素之间用逗号隔开</li>
+          <p>
+            如：
+            <xmp> 
+              /* 同时作用于多个元素 */
+              body, div {
+                padding: 0px;
+                margin: 0px;
+              }              
+            </xmp>
+          </p>
+          <li style="color: blue">如果值为若干单词，则要给值加引号;除了这种情况外其他时候不可以加引号</li>
+          <p>
+            如：
+            <xml>
+              p {
+                font-family:"Times New Roman",Georgia,Serif;
+              }
+            </xml>
+          </p>
+          <li>css代码的注释</li>
+          <p>
+            使用 /* 我是注释内容 */
+          </p>
+          <li>样式的优先顺序:</li>
+            <ul>
+              <li>设计者设计的样式>浏览器用户自定义的样式>浏览器自设的样式</li>
+              <li>强制优先级：！important</li>
+            </ul>
+            <ol>
+              <li>行内（内联）样式</li>
+              <li>内部样式：style中的样式</li>
+              <li>外部样式</li>
+            </ol>
+            <li>层叠、继承、冲突</li>
+              <ul>
+                <li>外观样式--比如字体、颜色可以继承;而布局有关的样式不可以继承，比如边框等</li>
+              </ul>
+            <li>可以在同一个 HTML 文档内部引用多个外部样式表。</li>
+        </ul>
+			</div>
+    </section>
+    <section>
+      <header>导航</header>
+      <div class="wrap-box">
+        <ul>
+          <li><a href="./index.html">CSS-介绍</a></li>
+          <li><a href="./01-selector.html">CSS3-选择器</a></li>
+          <li><a href="./selector-cases.html">CSS3-选择器练习案例</a></li>
+        </ul>
+      </div>
+    </section>
+	</div>
+</body>
+</html>
