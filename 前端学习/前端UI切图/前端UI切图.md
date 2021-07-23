@@ -14,7 +14,7 @@
 
 ### 核心-选择工具
 
-<img src="D:\study\前端UI切图\images\image-20210309151613378.png" alt="image-20210309151613378" style="zoom:50%;" />
+<img src=".\images\image-20210309151613378.png" alt="image-20210309151613378" style="zoom:50%;" />
 
 ctrl + alt + shift + e 将所有图层合并成一张图片
 
@@ -24,7 +24,7 @@ ctrl + alt + shift + e 将所有图层合并成一张图片
 
 ### 修图
 
-<img src="D:\study\前端UI切图\images\image-20210309154144436.png" alt="image-20210309154144436" style="zoom:50%;" />
+<img src=".\images\image-20210309154144436.png" alt="image-20210309154144436" style="zoom:50%;" />
 
 
 
@@ -36,11 +36,11 @@ ctrl + alt + shift + e 将所有图层合并成一张图片
 - 利用参考线进行切图
 - 图片格式，如png8、png24、jpg、gif
 
-![image-20210309164304367](D:\study\前端UI切图\images\image-20210309164304367.png)
+![image-20210309164304367](.\images\image-20210309164304367.png)
 
 
 
-![image-20210309164701750](D:\study\前端UI切图\images\image-20210309164701750.png)
+![image-20210309164701750](.\images\image-20210309164701750.png)
 
 
 
@@ -54,7 +54,7 @@ ctrl + alt + shift + e 将所有图层合并成一张图片
 
 **利用参考线进行切图**
 
-![image-20210309170226919](D:\study\前端UI切图\images\image-20210309170226919.png)
+![image-20210309170226919](.\images\image-20210309170226919.png)
 
 
 
@@ -78,15 +78,15 @@ wbmp：黑白
 
 **使用PS进行拼接**
 
-![image-20210309172341030](D:\study\前端UI切图\images\image-20210309172341030.png)
+![image-20210309172341030](.\images\image-20210309172341030.png)
 
-![image-20210309172418950](D:\study\前端UI切图\images\image-20210309172418950.png)
+![image-20210309172418950](.\images\image-20210309172418950.png)
 
 
 
 **使用Css Sprites Generator工具进行拼接**
 
-![image-20210309172526322](D:\study\前端UI切图\images\image-20210309172526322.png)
+![image-20210309172526322](.\images\image-20210309172526322.png)
 
 
 
