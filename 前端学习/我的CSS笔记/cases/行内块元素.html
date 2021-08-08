@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行内块元素</title>
+</head>
+<style>
+    .box1{
+        height: 60px;
+        width: 500px;
+        border: 1px solid black;
+        margin: 0 auto;
+    }
+    span{
+        text-align: center;
+        background-color: pink;
+        display: inline-block; /* 转换为行内块级元素 */       
+        width: 100px; /* 宽度 */
+        height: 50px; /* 高度 */
+        line-height: 50px; /* 行高 */
+        margin-left: 10px; /* 左外边距 */
+        padding-top: 10px; /* 上内边距 */
+    }
+    /* 设置背景色 */
+    .box1 span:nth-child(2){
+        background-color: antiquewhite;
+    }
+    .box1 span:nth-child(3){
+        background-color:aqua;
+    }
+    .box1 span:nth-child(4){
+        background-color:bisque;
+    }
+    .box2{
+        display: inline;
+        margin-left: 100px;
+        background-color: pink;
+    }
+</style>
+<body>
+    <div class="box1">
+        <span>标题1</span><span>标题2</span><span>标题3</span><span>标题4</span>
+    </div>
+    <div class="box2">我是div</div>
+</body>
+</html>

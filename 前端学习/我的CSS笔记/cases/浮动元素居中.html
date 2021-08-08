@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>如何居中一个浮动元素</title>
+    <style>
+        .box1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            float: left;
+            margin-left: 50%; /*浮动元素左侧位于父盒子正中间*/
+        }
+        .box2 {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            float: left;
+            margin-left: 50%; /*浮动元素左侧位于父盒子正中间*/
+            position: relative; /* 设置相对定位 */
+            left:-50px; /*相对原来的位置左移宽度的二分之一*/
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">
+        我是一个浮动元素1
+    </div>
+    <div class="box2">
+        我是一个居中的浮动元素2
+    </div>
+</body>
+</html>
