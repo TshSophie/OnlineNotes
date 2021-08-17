@@ -1,0 +1,42 @@
+/*
+ * @Author: Li 
+ * @Date: 2020-04-26 14:14:14
+ * @Last Modified by: Li
+ * @Last Modified time: 2020-04-26 17:28:14
+ * 框架的主文件，以后使用框架的时候都会通过这个文件来引用所有的样式，所以这个文件的功能就是集成其他的样式。
+ */
+ 
+/* css reset */
+@import './reset.css';
+/* 公共样式 */
+@import './common.css';
+/* 字体图标 */
+@import './icon.css';
+/* 标题栏样式 */
+@import './header.css';
+/* 内容区样式 */
+@import './content.css';
+/* 导航条样式 */
+@import './navbar.css';
+/* 表单样式 */
+@import './input.css';
+/* 按钮的样式 */
+@import './button.css';
+/* 搜索栏的样式 */
+@import './search.css';
+/* 列表的样式 */
+@import './list.css';
+/* 网格组件的样式 */
+@import './grid.css';
+/* 菜单组件的样式 */
+@import './menu.css';
+/* 模态框组件的样式 */
+@import './modal.css';
+/* 加载提示组件 */
+@import './loading.css';
+/* Toast弹出提示组件 */
+@import './toast.css';
+/* actionSheet可选菜单 */
+@import './action-sheet.css';
+/* article文本组件 */
+@import './article.css';

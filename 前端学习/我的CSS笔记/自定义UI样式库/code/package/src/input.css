@@ -1,0 +1,65 @@
+/* 表单中的清空按钮 */
+.tt-form-item > .tt-form-body > .tt-input-reset{
+  position: absolute;
+  width: .8rem;
+  height: .8rem;
+  line-height: .8rem;
+  top: 50%;
+  margin-top: -.4rem;
+  right: 1rem;
+  font-size: .6rem;
+  background: #aaa;
+  color: #fff;
+  border-radius: 50%;
+}
+
+/* 自定义单选 */
+.tt-form-item > .tt-radio{
+  flex: 1;
+  font-size: .8rem;
+  line-height: 2rem;
+}
+/* 未选中状态的图标 */
+.tt-form-item > .tt-radio > .tt-radio-icon{
+  margin-right: .5rem;
+  color: #09BB07;
+  visibility: hidden;
+}
+/* 选中状态的图标 */
+.tt-form-item > .tt-radio.checked > .tt-radio-icon{
+  visibility: visible;
+}
+/* 隐藏的radio类型的input */
+.tt-form-item > .tt-radio > .tt-radio-input{
+  position: absolute;
+  left: -999rem;
+}
+
+/* 自定义多选 */
+.tt-form-item > .tt-check{
+  flex: 1;
+  font-size: .8rem;
+  line-height: 2rem;
+}
+/* 未选中时的图标 */
+.tt-form-item > .tt-check > .tt-check-icon{
+  margin-right: .5rem;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  color: rgba(0,0,0,0);
+  font-size: .6rem;
+  width: .8rem;
+  height: .8rem;
+  line-height: .8rem;
+}
+/* 选中时的图标 */
+.tt-form-item > .tt-check.checked > .tt-check-icon{
+  background: #09BB07;
+  color: #fff;
+  border-color: rgba(0,0,0,0)
+}
+/* 隐藏的check类型的input */
+.tt-form-item > .tt-check > .tt-check-input{
+  position: absolute;
+  left: -999rem;
+}
