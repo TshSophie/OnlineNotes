@@ -21,6 +21,8 @@
   <img src="loading.gif" data-src="img05.jpg">  
 
   <script>
+   
+
     let num = document.getElementsByTagName('img').length
     let img = document.getElementsByTagName('img')
     let n = 0 // 记录图片加载到的位置，避免每次从头开始加载
@@ -41,8 +43,10 @@
       console.log("lazyload...");
       isLoadImg = n >= num
       _scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      console.log(num);
       for (let i = n; i < num; i++) {
        if (img[i].offsetTop < _clientHeight + _scrollTop) {
+         console.log(img[i].offsetTop);
          if (img[i].getAttribute('src') == 'loading.gif') {
            img[i].src = img[i].getAttribute('data-src')
          }

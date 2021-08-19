@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图片懒加载</title>
+  <style>
+    img{
+      display: block;
+      margin-bottom: 350px;
+    }
+  </style>
+</head>
+<body>
+  <div class="show">
+    <img src="loading.gif" data-src="img.jpg">
+    <img src="loading.gif" data-src="img01.jpg">
+    <img src="loading.gif" data-src="img02.jpg">
+    <img src="loading.gif" data-src="img03.jpg">
+    <img src="loading.gif" data-src="img04.jpg">
+    <img src="loading.gif" data-src="img05.jpg"> 
+  </div> 
+
+  <script src="./LazyLoading.js"></script>
+  <script>
+    new LazyLoading({
+      el: 'show',
+      placeholder: 'loading.gif',
+      createHook: function (params) {
+        console.log("初始化完毕，调用钩子");        
+      },
+      loadedHook: function(){
+        console.log("资源加载完毕，调用钩子");
+      }
+    })
+  </script>
+</body>
+</html>
