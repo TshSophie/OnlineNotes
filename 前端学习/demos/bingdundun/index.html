@@ -1,0 +1,60 @@
+<!-- from https://segmentfault.com/a/1190000041385432 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" name="viewport">
+    <link rel="stylesheet" href="./index.css">
+    <title>冰墩墩</title>
+</head>
+<body>
+    <div class="wrapper" id="bingdd">
+        <div class="body"></div>
+        <div class="ear ear_l"></div>
+        <div class="ear ear_r"></div>
+        <div class="arm arm_l"></div>
+        <div class="arm arm_r">
+            <div class="heart">
+                <div class="heart_l"></div>
+                <div class="heart_r"></div>
+            </div>
+        </div>
+        <div class="leg leg_l"></div>
+        <div class="leg leg_r"></div>
+        <div class="face">
+            <div class="line line1"></div>
+            <div class="line line2"></div>
+            <div class="line line3"></div>
+            <div class="line line4"></div>
+            <div class="eye eye_l">
+                <div class="eye-c1">
+                    <div class="eye-c2">
+                        <div class="eye-c3"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="eye eye_r">
+                <div class="eye-c1">
+                    <div class="eye-c2">
+                        <div class="eye-c3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nose">
+                <div class="nose-c"></div>
+            </div>
+            <div class="mouth"></div>
+            <div class="mouth-c"></div>
+        </div>
+    </div>
+    <script>
+        const wWidth = window.innerWidth;
+        if (wWidth < 666) {
+            const bdd = document.getElementById('bingdd');
+            bdd.style.zoom = `${wWidth / 666}`;
+        }
+    </script>
+</body>
+</html>
