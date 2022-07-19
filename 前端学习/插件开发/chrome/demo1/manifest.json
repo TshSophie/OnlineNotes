@@ -1,0 +1,20 @@
+{
+    "name": "Hello Extensions",
+    "description": "Base Level Extension",
+    "version": "1.0", // 扩展的自定义版本
+    "manifest_version": 3,
+    "action": {
+      "default_popup": "hello.html", // 扩展的页面
+      "default_icon": "hello_extensions.png" // 扩展的图标
+    },
+    "commands": {
+      "_execute_action": {
+        "suggested_key": { // 打开扩展页面的快捷键
+          "default": "Ctrl+Shift+F",
+          "mac": "MacCtrl+Shift+F"
+        },
+        "description": "Opens hello.html"
+      }
+    }
+  }
+  
