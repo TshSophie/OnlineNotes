@@ -1,5 +1,6 @@
 let arr = [
   1.5, -12.3, 3.2, -5.5, 23.2, 3.2, -1.4, -12.2, 34.2, 5.4, -7.8, 1.1, -4.9,
+    //  1.5, -12.3, 3.2, -5.5, 23.2, 3.2, -1.4, -62.2, 44.2, 5.4, -7.8, 1.1, -4.9,
 ];
 
 // 思路一：三重循环，枚举法
@@ -109,7 +110,7 @@ function findMaxSumRange(values, startIndex, endIndex) {
   }
 }
 
-// 方法四：正反两遍扫描，总体算法的时间复杂度为O(K)
+// 思路四：正反两遍扫描，总体算法的时间复杂度为O(K)
 // 1 先在序列中扫描找到第一个大于0的数。
 //    1.1 假设整个数组都是负数或者0，那找到最大的数，也就是所要找的区间。
 //    1.2 否则，从头部序列开始删除直到遇到第一个大于0的数。到此我们认为数组第0个元素是一个正数。
@@ -131,29 +132,22 @@ function findMaxSumRangeV4(values) {
   }
   // 所有数都小于等于0，则找最大的那个数
   if (p == -1) {
-    let max = Number.MIN_VALUE;
-    let maxOfIndex = -1;
-    for (let i = 0; i < K; i++) {
-      if (values[i] > max) {
-        max = values[i];
-        maxOfIndex = i;
-      }
-    }
+    let maxOfIndex = argMax(values);
     return [maxOfIndex, maxOfIndex];
   }
-  //从左到右
+  // 从左到右找到和最大的数即为右边界
   let sum = values[p];
   let maxf = sum;
   let r = 0;
   for (let q = p + 1; q < K; q++) {
-    //计算子数组的和
+    // 计算子数组的和
     sum += values[q];
     if (maxf < sum) {
       maxf = sum;
       r = q;
     }
   }
-  //从右到左
+  // 从右到左找到和最大的数即为左边界
   sum = values[K - 1];
   maxf = sum;
   let l = K - 1;
@@ -167,7 +161,145 @@ function findMaxSumRangeV4(values) {
   return [l, r];
 }
 
-console.log(findMaxSumRangeV1(arr));
-console.log(findMaxSumRangeV2(arr));
-console.log(findMaxSumRangeV3(arr));
-console.log(findMaxSumRangeV4(arr));
+// 思路五：
+function findMaxSumRangeV5(values) {
+  if (values == null || values.length == 0) return null;
+  let K = values.length;
+  // 检查是否有大于0的元素
+  let p = -1;
+  for (let i = 0; i < K; i++) {
+    if (values[i] > 0) {
+      p = i;
+      break;
+    }
+  }
+  // 所有数都小于等于0，则找最大的那个数
+  if (p == -1) {
+    let maxOfIndex = argMax(values);
+    return [maxOfIndex, maxOfIndex];
+  }
+  let maxSum = Number.MIN_VALUE; // 区间和最大值
+  let l = -1,
+    r = -1;
+  let sum = 0; // 某个区域内的累加和
+  let maxF = Number.MIN_VALUE; // 某个区域内从左到右累加的和最大值
+  let rF = p; // 某个区域内和最大值的右边界
+  let i = p;
+  while (i < K) {
+    sum += values[i];
+    // 发现S(p,q)<0，那么需要从q位置开始，反向计算Maxb
+    if (sum < 0) {
+      let q = i;
+      // 查找左边界
+      let sumB = 0;
+      let maxB = Number.MIN_VALUE;
+      let lF = q;
+      for (let j = q; j >= p; j--) {
+        sumB += values[j];
+        if (sumB > maxB) {
+          maxB = sumB;
+          lF = j;
+        }
+      }
+      // 计算区域内的和，如果该序列和大于之前的最大序列和，则更新maxSum及区间开始结束下标
+      let sumRange = rangeSum(values, lF, rF);
+      if (sumRange > maxSum) {
+        maxSum = sumRange;
+        l = lF;
+        r = rF;
+      }
+      // 从q+1开始往后扫描，查找下一个区段的起点（即跳过小于0的数，找到第一个大于0的元素）
+      while (q + 1 < K && values[q + 1] <= 0) {
+        q++;
+      }
+      p = q + 1;
+      i = q + 1;
+    } else if (maxF < sum) {
+      // 否则S(p,q)>0，且当前位置的序列累计和大于最大值就更新maxF和右边界位置
+      maxF = sum;
+      rF = i;
+      i++;
+    }
+  }
+  return [l, r];
+}
+
+/**
+ * 获取序列最大值的下标
+ * @param {Array} values 序列 
+ * @returns 返回序列最大值的下标
+ */
+function argMax(values) {
+  let max = Number.MIN_VALUE;
+  let maxOfIndex = -1;
+  for (let i = 0; i < values.length; i++) {
+    if (values[i] > max) {
+      max = values[i];
+      maxOfIndex = i;
+    }
+  }
+  return maxOfIndex;
+}
+
+/**
+ * 获取区间累计最大的和
+ * @param {Array} values 
+ * @param {Int} start 
+ * @param {Int} end 
+ * @returns 返回区间累计最大的和
+ */
+function rangeSum(values, start, end) {
+  let sumRange = 0;
+  for (let j = start; j <= end; j++) {
+    sumRange += values[j];
+  }
+  return sumRange;
+}
+
+// 思路6：动态规划
+// 用dp[i]表示以第i个元素为结尾的子数组的最大和。那么答案就是max(dp)。
+// 对于dp[i]来说，要么第i个元素作为前面子数组的最后一个元素，追加上去；要么就是单独成一个子数组。
+// dp[i]=max(dp[i-1]+values[i], values[i]).
+function findMaxSumRangeV6(values) {
+  let pre = values[0];
+  let maxSum = values[0];
+  let l = 0,
+    r = 0;
+  let lF = 0,
+    rF = 0;
+  for (let i = 0; i < values.length; i++) {
+    // 表示pre是大于0的，之前的累加都是正向的
+    if (pre + values[i] > values[i]) {
+      pre = pre + values[i];
+      rF = i;
+    } else {
+      // 转折点，重新开始累计，因此lF,rF都置为该数的序号
+      pre = values[i];
+      lF = i;
+      rF = i;
+    }
+    // 检测到目前最大的序列累计
+    if (maxSum < pre) {
+      maxSum = pre;
+      l = lF;
+      r = rF;
+    }
+  }
+  return [l, r];
+}
+
+/*
+
+动态规划基本思想
+如果我们能够保存已解决的子问题的答案，而在需要时再找出已求得的答案，这样就可以避免大量的重复计算，
+节省时间。我们可以用一个表来记录所有已解的子问题的答案。不管该子问题以后是否被用到，只要它被计算过，
+就将其结果填入表中。这就是动态规划法的基本思路。具体的动态规划算法多种多样，但它们具有相同的填表格式
+
+*/
+
+console.log('findMaxSumRangeV1', findMaxSumRangeV1(arr));
+console.log('findMaxSumRangeV2', findMaxSumRangeV2(arr));
+console.log('findMaxSumRangeV3', findMaxSumRangeV3(arr));
+console.log('findMaxSumRangeV4', findMaxSumRangeV4(arr));
+console.log('findMaxSumRangeV5', findMaxSumRangeV5(arr));
+console.log('findMaxSumRangeV6', findMaxSumRangeV6(arr));
