@@ -8,7 +8,7 @@ let arr2 = [
 ]
 
 let arr3 = [
-  -1.4, -10, -9.9, 4
+  -1.4, -1, -9.9, -0.5
 ]
 
 // 思路一：三重循环，枚举法
@@ -126,9 +126,12 @@ function findMaxSumRange(values, startIndex, endIndex) {
 // 3 对于所有的q，都有S(1,q)>=0，或者存在某个q0，当q > q0的时候，符合，都有S(1,q) >= 0。 在这种情况下，当扫描到最后，
 // 即q=K时，所保留的那个Maxf所对应的r就是我们要找的区间的右边界。
 // 为什么？因为从第r+1个数开始，或者是负数，或者是0，无论再怎么加，也不可能让和更大。
+// 存在缺陷，无法正确处理累加总和连续小于0的情况
 function findMaxSumRangeV4(values) {
   if (values == null || values.length == 0) return null;
   // let maxSum = Number.MIN_VALUE;
+  let maxOfIndex = -1;
+  let maxMinus = values[0];
   // 找到第一个大于0的数
   let K = values.length;
   let p = -1;
@@ -136,11 +139,12 @@ function findMaxSumRangeV4(values) {
     if (values[i] > 0) {
       p = i;
       break;
+    } else if(maxMinus < values[i]){
+      maxOfIndex = i
     }
   }
   // 所有数都小于等于0，则找最大的那个数
   if (p == -1) {
-    let maxOfIndex = argMax(values);
     return [maxOfIndex, maxOfIndex];
   }
   // 从左到右找到和最大的数即为右边界
@@ -169,8 +173,71 @@ function findMaxSumRangeV4(values) {
   return [l, r];
 }
 
-// 思路五：
+
 function findMaxSumRangeV5(values) {
+  if (values == null || values.length == 0) return null;
+  // let maxSum = Number.MIN_VALUE;
+  let maxOfIndex = -1;
+  let maxMinus = values[0];
+  // 找到第一个大于0的数
+  let K = values.length;
+  let p = -1;
+  for (let i = 0; i < K; i++) {
+    if (values[i] > 0) {
+      p = i;
+      break;
+    } else if(maxMinus < values[i]){
+      maxOfIndex = i
+    }
+  }
+  // 所有数都小于等于0，则找最大的那个数
+  if (p == -1) {
+    return [maxOfIndex, maxOfIndex];
+  }
+  // 从左到右找到和最大的数即为右边界
+  let sum = values[p];
+  let maxf = sum;
+  let r = p;
+  let l = p;
+  for (let q = p + 1; q < K; q++) {
+    // 计算子数组的和
+    sum += values[q];
+    // 发现S(p,q)<0，那么需要从q位置开始，反向计算Maxb
+    if(sum < maxf) {
+      // console.log(sum, maxf)
+      // 查找左边界
+      let sumB = 0;
+      let maxB = Number.MIN_VALUE;      
+      for (let j = q; j >= p; j--) {
+        sumB += values[j];
+        if (sumB > maxB) {
+          maxB = sumB;
+          // console.log(j, maxB)
+          l = j;
+        }
+      }
+      // 存在局部最大区间和大于缓存的最大值，更新右边界
+      if(maxB > maxf) {
+        r = q;
+        p = l;
+        sum = maxB;
+        maxf = maxB;
+      } else {
+        // 跳过负数
+        while (q + 1 < K && values[q + 1] <= 0) {
+          q++;
+        }
+      }
+    } else {
+      maxf = sum;
+      r = q;
+    }
+  }
+  return [l, r];
+}
+
+// 思路五：
+function findMaxSumRangeV45(values) {
   if (values == null || values.length == 0) return null;
   let K = values.length;
   // 检查是否有大于0的元素
@@ -318,8 +385,8 @@ function findMaxSumRangeV7(values){
   let sum = 0;
   let leftIndex = []
   let rightIndex = []
-  let maxOfIndex = 0
-  let maxMinus = values[maxOfIndex]
+  let maxIndex = 0
+  let maxMinus = values[maxIndex]
   for(let i = 0; i < values.length; i++){
     // 缓存左边界的值(转折点)
     if(sum == 0 && values[i] > 0 && sum + values[i] > result) {
@@ -341,27 +408,36 @@ function findMaxSumRangeV7(values){
     // 都为负数的情况
     if(maxMinus < values[i]) {
       maxMinus = values[i]
-      maxOfIndex = i
+      maxIndex = i
     }
   }
   if(result == Number.MIN_VALUE) {
-    return {result: maxMinus, leftIndex: maxOfIndex, rightIndex: maxOfIndex}
+    return {result: maxMinus, leftIndex: maxIndex, rightIndex: maxIndex}
   }
   return {result, leftIndex, rightIndex};
 }
 
+console.log(arr)
+console.log(arr2)
 // console.log('findMaxSumRangeV1', findMaxSumRangeV1(arr));
 // console.log('findMaxSumRangeV1', findMaxSumRangeV1(arr2));
 // console.log('findMaxSumRangeV2', findMaxSumRangeV2(arr));
 // console.log('findMaxSumRangeV2', findMaxSumRangeV2(arr2));
-console.log('findMaxSumRangeV3', findMaxSumRangeV3(arr));
-console.log('findMaxSumRangeV3', findMaxSumRangeV3(arr2));
+
+// console.log('-----------------------------findMaxSumRangeV3-----------------------------');
+// console.log('findMaxSumRangeV3', findMaxSumRangeV3(arr));
+// console.log('findMaxSumRangeV3', findMaxSumRangeV3(arr2));
+// console.log('findMaxSumRangeV3', findMaxSumRangeV3(arr2));
 // console.log('findMaxSumRangeV4', findMaxSumRangeV4(arr));
 // console.log('findMaxSumRangeV4', findMaxSumRangeV4(arr2));
+// console.log('findMaxSumRangeV4', findMaxSumRangeV4(arr3));
 // console.log('findMaxSumRangeV5', findMaxSumRangeV5(arr));
-// console.log('findMaxSumRangeV5', findMaxSumRangeV5(arr2));
+console.log('-----------------------------findMaxSumRangeV5-----------------------------');
+console.log('findMaxSumRangeV5', findMaxSumRangeV5(arr));
+console.log('findMaxSumRangeV5', findMaxSumRangeV5(arr2));
+// console.log('findMaxSumRangeV5', findMaxSumRangeV5(arr3));
 // console.log('findMaxSumRangeV6', findMaxSumRangeV6(arr));
-// console.log('findMaxSumRangeV6', findMaxSumRangeV6(arr2));
+// console.log('findMaxSumRangeV6', findMaxSumRangeV6(arr3));
 console.log('findMaxSumRangeV7', findMaxSumRangeV7(arr));
 console.log('findMaxSumRangeV7', findMaxSumRangeV7(arr2));
 // console.log('findMaxSumRangeV7', findMaxSumRangeV7(arr3));
