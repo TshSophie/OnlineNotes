@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>03从递推到递归</title>
 </head>
+
 <body>
     <p>
-    问题：
+        问题：
     <ul style="list-style-type: decimal">
         <li>
             <h4>上台阶问题（斐波那契数列）</h4>
@@ -19,14 +21,157 @@
         <li>
             <h4>汉诺塔问题</h4>
             <p>
-                有三根相邻的柱子，标号为A,B,T， A柱子上按从小到大叠放着n个不同大小的盘子，要求把所有盘子每次移动一个，最终放到B柱子上；移动过程中可以借助T柱子，但要求每次移动中必须保持小盘子在大盘子的上面。比如n=10，请给出最少次数的移动方案。
+                有三根相邻的柱子，标号为A,B,T，
+                A柱子上按从小到大叠放着n个不同大小的盘子，要求把所有盘子每次移动一个，最终放到B柱子上；移动过程中可以借助T柱子，但要求每次移动中必须保持小盘子在大盘子的上面。比如n=10，请给出最少次数的移动方案。
             </p>
+            <!-- <canvas id="myCanvas" width="500" height="300" style="border:1px solid #000000;">
+                您的浏览器不支持 HTML5 canvas 标签。
+            </canvas> -->
         </li>
-        <li>八皇后问题</li>
+        <li>
+            <h4>八皇后问题</h4>
+            <p>
+                该问题是国际西洋棋棋手马克斯·贝瑟尔于1848年提出：在8×8格的国际象棋上摆放八个皇后，
+                使其不能互相攻击，即任意两个皇后都不能处于同一行、同一列或同一斜线上，问有多少种摆法。
+            </p>
+            <canvas id="myCanvas2" width="1500" height="900" style="border:1px solid #000000;">
+                您的浏览器不支持 HTML5 canvas 标签。
+            </canvas>
+        </li>
         <li>二叉树的广度优先遍历和深度优先遍历</li>
     </ul>
     </p>
-    
 </body>
 <script type="text/javascript" src="./index.js"></script>
+<script>
+
+    function draw2() {        
+        var canvas = document.getElementById("myCanvas2");
+        var ctx = canvas.getContext("2d");
+        var width = 30, height =30;
+        let boardW = width * 8
+        // ctx.lineWidth = 10;
+        ctx.font = "20px serif";
+        ctx.fillText('八皇后问题-解', boardW * 3, 20);
+
+        // 绘制国际象棋棋盘
+        function drawBrick(x = 20, y = 20, color = "pink", width = 30, height = 30) {
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, width, height);
+        }
+        function drawChessboard(x = 0, y = 0, queenPosition = []) {    
+            console.log(queenPosition)        
+            for(let i = 0; i < 8; i++) {
+                for (let j = 0; j < 8; j++) {                
+                    let color = "black";
+                    if((i % 2 == 0 && j % 2 == 0) || (i % 2 == 1 && j % 2 == 1)) {
+                        color = "white";
+                    }
+                    // 绘制方块
+                    drawBrick(x + i * height, y + j * width, color);
+                    if(queenPosition[j] == i) {
+                        // console.log(i, j)
+                        // 绘制棋子
+                        ctx.fillText('🚩', x + i * height + 5, y + j * width + 20);
+                    }
+                }
+            }
+            ctx.strokeRect(x, y, width * 8, height * 8)
+        }
+        let queen = [0, 4, 7, 5, 2, 6, 1, 3]
+        let margin = 50
+        for(let i = 0; i < 15; i++) {
+            let col = Math.ceil((i + 1) / 5 )
+            let row = (i + 1) % 5 == 0 ? 5 : (i + 1) % 5
+            row--
+            col--
+            drawChessboard(boardW * row + margin * (row + 1), boardW * col + margin * (col + 1), resultArr[i])            
+        }
+        
+    }
+
+    draw2()
+
+    function draw1() {
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+
+        // 绘制柱子
+        function drawColumn(x, y, width, height, color, text) {
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, width, height);
+            ctx.fillText(text, x + width / 2 - 2, y);
+        }
+        var aNum = 0, tNum = 0, bNum = 0;
+        // 绘制A柱碟子
+        function drawPlateAtA(num, color = 'pink') {
+            ctx.fillStyle = color;
+            let width = 140, height = 20;
+            let x = 60, y = canvas.height - height;
+            y = y - aNum * height
+            width = width - aNum * 10
+            aNum++
+            ctx.fillRect(x - width / 2 + 15, y, width, height);
+            ctx.fillStyle = 'black';
+            ctx.fillText(num, x + 13, y + 13);
+        }
+        // 绘制T柱碟子
+        function drawPlateAtT(num, color = 'pink') {
+            ctx.fillStyle = color;
+            let width = 120, height = 20;
+            let x = 230, y = canvas.height - height;
+            y = y - tNum * height
+            width = width - tNum * 10
+            tNum++
+            ctx.fillRect(x - width / 2 + 15, y, width, height);
+            ctx.fillStyle = 'black';
+            ctx.fillText(num, x + 13, y + 13);
+        }
+        // 绘制B柱碟子
+        function drawPlateAtB(num, color = 'pink') {
+            ctx.fillStyle = color;
+            let width = 120, height = 20;
+            let x = 400, y = canvas.height - height;
+            y = y - bNum * height
+            width = width - bNum * 10
+            bNum++
+            ctx.fillRect(x - width / 2 + 15, y, width, height);
+            ctx.fillStyle = 'black';
+            ctx.fillText(num, x + 13, y + 13);
+        }
+    
+        // 三根柱子
+        drawColumn(60, 50, 30, 250, 'black', 'A')
+        drawColumn(230, 50, 30, 250, 'black', 'T')
+        drawColumn(400, 50, 30, 250, 'black', 'B')
+
+        // A柱子绘制碟子
+        for (let i = 0; i < 10; i++) {
+            drawPlateAtA(i)
+        }
+        for (let i = 0; i < 3; i++) {
+            drawPlateAtT(i)
+        }
+        for (let i = 0; i < 5; i++) {
+            drawPlateAtB(i)
+        }
+    
+        // 监听鼠标位置
+        // canvas.addEventListener("mousemove", function (e) {
+
+        //     var cRect = canvas.getBoundingClientRect();        // 获取CSS pos，以及宽度/高度
+
+        //     var canvasX = Math.round(e.clientX - cRect.left);  // 减去画布的“左”
+
+        //     var canvasY = Math.round(e.clientY - cRect.top);   // 从X / Y位置
+
+        //     // ctx.clearRect(0, 0, canvas.width, canvas.height);  // (0,0)画布的左上方
+
+        //     // ctx.fillText("X: "+canvasX+", Y: "+canvasY, 10, 20);
+        //     console.log("X: " + canvasX + ", Y: " + canvasY);
+
+        // });
+    }
+</script>
+
 </html>
