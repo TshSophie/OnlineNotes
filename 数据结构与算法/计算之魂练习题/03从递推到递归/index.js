@@ -94,8 +94,8 @@ function setQueen(n = 0) {
   }
 
   // 从第1列摆放到第max列
-  for (let i = 0; i < max; i++) {
-    arr[n] = i; // 赋值给arr[n]，进一步判断
+  for (let col = 0; col < max; col++) {
+    arr[n] = col; // 赋值给arr[n]，进一步判断
     if (check(n)) {
       setQueen(n + 1);
     }
