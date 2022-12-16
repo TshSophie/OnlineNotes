@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事件总线</title>
+</head>
+<body>
+  <script>
+    const eventBus = {
+      callbacks: {
+      }
+    }
+
+    // 绑定事件
+    eventBus.on = function(type, callback) {
+      if(this.callbacks[type]) {
+        this.callbacks[type].push(callback)
+      } else {
+        this.callbacks[type] = [callback]
+      }
+    }
+
+    // 分发事件
+    eventBus.emit = function(type, data) {
+      if (this.callbacks[type] && this.callbacks[type].length > 0) {
+        this.callbacks[type].forEach(callback => {
+          callback(data)
+        });
+      }
+    }
+
+    // 解绑事件
+    eventBus.off = function(type) {
+      if (type) {
+        delete this.callbacks[type]
+      } else {
+        this.callbacks = {}
+      }
+    }
+
+    eventBus.on('login', function(params) {
+      console.log("login......")
+    })
+    eventBus.on('login', function(params) {
+      console.log("login2......")
+    })
+    eventBus.on('logout', function(params) {
+      console.log("logout......")
+    })
+
+    eventBus.off('login')
+
+    setTimeout(() => {
+      eventBus.emit('login')
+      eventBus.emit('logout')
+    }, 3000);
+
+    console.log(eventBus)
+  </script>
+</body>
+</html>

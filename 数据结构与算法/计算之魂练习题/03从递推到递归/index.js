@@ -71,12 +71,15 @@ function Hanoi(A, B, aux, n) {
 let max = 8; // 定义数组的最大长度
 let arr = []; // 声明数组
 let count = 0; // 记录解法的数量
-let resultArr = []
-// 判断方法
+let resultArr = [];
+// 判断该位置是否合适
 function check(n) {
   for (let i = 0; i < n; i++) {
-    // 判断n行和之前的n-1个皇后的是否可以摆放
+    // 判断n行和之前的n-i个皇后之间是否存在同一直线（行/列/斜线）的情况
     // Math.abs(n-i)==Math.abs(arr[n]-arr[i]) 判断是否在同一直线上（成等腰三角形）
+    // 同一行->n=i
+    // 同一列->arr[n]=arr[i]
+    // 同一斜线->Math.abs(n - i) == Math.abs(arr[n] - arr[i])
     if (Math.abs(n - i) == Math.abs(arr[n] - arr[i]) || arr[n] == arr[i]) {
       return false;
     }
@@ -89,13 +92,14 @@ function setQueen(n = 0) {
   if (n == max) {
     // 若摆放第9个皇后则结束调用
     count++; // 方法+1
-    resultArr.push([...arr])
+    resultArr.push([...arr]);
     return;
   }
 
   // 从第1列摆放到第max列
   for (let col = 0; col < max; col++) {
-    arr[n] = col; // 赋值给arr[n]，进一步判断
+    // 赋值给arr[n]，第n行，进一步判断
+    arr[n] = col;
     if (check(n)) {
       setQueen(n + 1);
     }
@@ -117,3 +121,115 @@ console.log("八皇后问题解法：", count);
 //   };
 // };
 // queen([1,1,1,1,1,1,1,1],0);
+
+
+/*****************************4、字符串计算器************************************** */
+function priority(operator) {
+  if(['+', '-'].indexOf(operator) > -1) {
+    return 1;
+  } else if(['*', '/'].indexOf(operator) >= -1) {
+    return 2;
+  }
+}
+
+function isOperator(char) {
+  return ['+', '-', '*', '/'].indexOf(char) > -1
+}
+
+function calculateByOp(num1, op, num2) {
+  num1 = parseFloat(num1)
+  num2 = parseFloat(num2)
+  switch(op) {
+    case '+': 
+      return num2 + num1;
+    case '-': 
+      return num2 - num1;
+    case '*': 
+      return num2 * num1;
+    case '/': 
+      if(num2 == 0) {
+        console.warn('非法值，除数不能为0')
+        return false
+      }
+      return num2 / num1;
+    default:
+      return false
+  }
+}
+
+function calculator(expression) {
+  let stack = [];
+  let i = 0;
+  let opTop = '';
+  stack.push(expression[i]);
+  i++;
+  while(i < expression.length) {
+    let cur = expression[i];
+    if(cur == '=') {
+      // 直接求取结果
+      let result = calculateByOp(stack.pop(), stack.pop(), stack.pop())
+      // 判断栈为不为空
+      if(stack.length == 0) {
+        return result;
+      } else if(stack.length == 2) {        
+        return calculateByOp(result, stack.pop(), stack.pop())
+      } else {
+        return '表达式存在问题'
+      }
+      // 如果当前扫描到的字符是运算符
+    } else if(isOperator(cur)) {
+      // opTop有值且栈顶不为运算符
+      if(opTop && !isOperator(stack[stack.length - 1])) {
+        // 比较cur和opTop的优先级
+        if(priority(opTop) >= priority(cur)) {
+          // 弹出栈
+          stack.push(calculateByOp(stack.pop(), stack.pop(), stack.pop()))
+        }
+      }
+      opTop = cur;
+    }
+    stack.push(cur);    
+    i++;
+  }
+  return '表达式存在问题'
+}
+
+console.log(calculator('5+4-2='))
+console.log(calculator('2*5-4*3/4/2='))
+
+function calculate2(s) {
+  const ops = [1];
+  let sign = 1;
+
+  let ret = 0;
+  const n = s.length;
+  let i = 0;
+  while (i < n) {
+      if (s[i] === ' ') {
+          i++;
+      } else if (s[i] === '+') {
+          sign = ops[ops.length - 1];
+          i++;
+      } else if (s[i] === '-') {
+          sign = -ops[ops.length - 1];
+          i++;
+      } else if (s[i] === '(') {
+          ops.push(sign);
+          i++;
+      } else if (s[i] === ')') {
+          ops.pop();
+          i++;
+      } else {
+          let num = 0;
+          while (i < n && !(isNaN(Number(s[i]))) && s[i] !== ' ') {
+            num = num * 10 + s[i].charCodeAt() - '0'.charCodeAt();
+            i++;
+          }
+
+          ret += sign * num; 
+      }
+  }
+  return ret;
+};
+
+console.log(calculate2('(1+(4+5+2)-3)+(6+8)'))

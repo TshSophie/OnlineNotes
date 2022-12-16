@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./src/01_call.js"></script>
+  <script src="./src/pubsub.js"></script>
+  <button id="handle">正常处理</button>
+  <button id="throttle">测试函数节流</button>
+  <button id="debounce">测试函数防抖</button>
+
+  <script>
+    /* 处理点击事件的回调函数 */
+    function handleClick(event) { // 处理事件的回调
+      console.log('处理点击事件', this, event)
+    }
+    document.getElementById('throttle').onclick = throttle(handleClick, 2000)
+    document.getElementById('debounce').onclick = debounce(handleClick, 2000)
+
+
+    
+  </script>
+</body>
+</html>

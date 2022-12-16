@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事件委托函数封装</title>
+</head>
+<body>
+  <div id="items">
+    <li>AAAA</li>
+    <li>BBBB</li>
+    <li>CCCC</li>
+    <div>EEEE</div>
+  </div>
+
+  <script>
+    function addEventListener(el, type, fn, selector) {
+      if(typeof el === 'string') {
+        el = document.querySelector(el)
+      }
+      if(!selector) {
+        el.addEventListener(type, fn)
+      } else {
+        el.addEventListener(type, function(e) {
+          const target = e.target
+          if(target.matches(selector)){
+            fn.call(target, e)
+          }
+        })
+      }
+    }
+
+    addEventListener('#items', 'click', function(e) {
+      console.log(e.target);
+    }, 'li')
+  </script>
+</body>
+</html>

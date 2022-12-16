@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
     // 入口
-    entry: './src4-数组的响应式处理/index.js',
+    entry: './src/index.js',
     // 出口
     output: {
         // 虚拟打包路径，就是说文件夹不会真正生成，而是在8080端口虚拟生成

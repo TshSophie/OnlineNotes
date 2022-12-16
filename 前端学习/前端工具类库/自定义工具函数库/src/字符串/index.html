@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 字符串反转
+    function reverseString(str) {
+      // return str.split('').reverse().join('')
+      // return [...str].reverse().join('')
+      return Array.from(str).reverse().join('')
+    }
+
+    // 判断回文
+    function palindrome(str) {
+      return reverseString(str) === str
+    }
+
+    function truncate(str, num) {
+      return str.length > num ? str.slice(0, num) + '...' : str
+    }
+
+    console.log(reverseString('abcdefg'));
+    console.log(palindrome('lol'));
+    console.log(truncate('ha hah ha', 5));
+  </script>
+</body>
+</html>
