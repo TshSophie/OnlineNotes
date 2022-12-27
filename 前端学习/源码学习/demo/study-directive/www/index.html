@@ -10,6 +10,7 @@
 <body>
     <div id="app">
         你好{{b.m.n}}
+        <p v-if="b.m.n > 2">xxxxxxxxxxxxxx</p>
         <br />
         <input type="text" v-model="b.m.n">
     </div>
@@ -30,12 +31,17 @@
             watch: {
                 a() {
                     console.log('a改变啦');
+                },
+                b() {
+                    console.log('b改变啦');
                 }
             },
             created() {
+                console.log("我是created...")
 
             },
             update() {
+                console.log("我是update...")
 
             }
         });

@@ -17,9 +17,19 @@ export default class Compile {
     }
   }
   node2Fragment(el) {
+    /*
+      1.createDocumentFragment()方法，是用来创建一个虚拟的节点对象，或者说，是用来创建文档碎片节点。它可以包含各种类型的节点，在创建之初是空的。
+      2.DocumentFragment节点不属于文档树，继承的parentNode属性总是null。它有一个很实用的特点，当请求把一个DocumentFragment节点插入文档树时，插入的不是DocumentFragment自身，而是它的所有子孙节点，即插入的是括号里的节点。这个特性使得DocumentFragment成了占位符，暂时存放那些一次插入文档的节点。它还有利于实现文档的剪切、复制和粘贴操作。 
+      另外，当需要添加多个dom元素时，如果先将这些元素添加到DocumentFragment中，再统一将DocumentFragment添加到页面，会减少页面渲染dom的次数，效率会明显提升。
+    */
     var fragment = document.createDocumentFragment();
 
     var child;
+    /*
+      Node.appendChild() 方法将一个节点附加到指定父节点的子节点列表的末尾处。
+      如果将被插入的节点已经存在于当前文档的文档树中，
+      那么 appendChild() 只会将它从原先的位置移动到新的位置（不需要事先移除要移动的节点）。
+    */
     // 让所有DOM节点，都进入fragment
     while ((child = el.firstChild)) {
       fragment.appendChild(child);
@@ -31,14 +41,20 @@ export default class Compile {
     // 得到子元素
     var childNodes = el.childNodes;
     var self = this;
-
+    // 这里简化了模板编译，仅处理双大括号变量的情况
     var reg = /\{\{(.*)\}\}/;
-
+    // 这里简化了，处理了最外层的，没有递归处理子节点
     childNodes.forEach((node) => {
       var text = node.textContent;
       text;
       // console.log(node.nodeType);
       // console.log(reg.test(text));
+      /*
+        nodeType
+        1 元素节点      
+        2 属性节点
+        3 文本节点
+      */
       if (node.nodeType == 1) {
         self.compileElement(node);
       } else if (node.nodeType == 3 && reg.test(text)) {
@@ -66,7 +82,7 @@ export default class Compile {
       if (attrName.indexOf("v-") == 0) {
         // v-开头的就是指令
         if (dir == "model") {
-          // console.log('发现了model指令', value);
+          console.log('发现了model指令', value);
           new Watcher(self.$vue, value, (value) => {
             node.value = value;
           });
@@ -80,7 +96,7 @@ export default class Compile {
             v = newVal;
           });
         } else if (dir == "if") {
-          // console.log('发现了if指令', value);
+          console.log('发现了if指令', value);
         }
       }
     });

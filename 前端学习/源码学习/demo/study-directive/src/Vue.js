@@ -15,6 +15,7 @@ export default class Vue {
         this._initWatch();
         // 模板编译
         new Compile(options.el, this);
+        this.$options.created && this.$options.created()
     }
 
     _initData() {
@@ -25,6 +26,7 @@ export default class Vue {
                     return self._data[key];
                 },
                 set: (newVal) => {
+                    this.$options.update && this.$options.update()
                     self._data[key] = newVal;
                 }
             });
