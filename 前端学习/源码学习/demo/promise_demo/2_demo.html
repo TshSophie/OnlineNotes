@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">获取数据</button>
+  <script>
+    /**
+     * 使用 promise 封装 ajax 异步请求
+     **/
+    function promiseAjax(url) {
+      return new Promise((resolve, reject)=>{
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.onreadystatechange = ()=>{
+          if(xhr.readyState !=4) return
+          const { status, response} = xhr;
+          if(status >= 200 && status < 300) {
+            resolve(JSON.parse(response));
+          } else {
+            reject(new Error('请求失败, status: ', status));
+          }
+        }
+        xhr.send();
+      });
+    }
+    const url = 'http://api.k780.com/?app=weather.today&weaid=1&appkey=APPKEY&sign=SIGN&format=json';    
+    document.getElementById('btn').addEventListener('click', (e)=>{
+      promiseAjax(url).then(result=>{
+        console.log("数据请求成功", result);
+      }, error=>{
+        console.log("请求失败", error.message);
+      });
+    });
+
+  </script>
+</body>
+</html>

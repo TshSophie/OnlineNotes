@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <script src="./promise.js"></script> -->
+  <script src="./promiseClass.js"></script>
+</head>
+<body>
+  <SCRipt>
+    // let p = new Promise((resolve, reject)=>{
+    //   // reject("error")
+    //   // resolve('OK');
+    //   // 抛出异常
+    //   // throw "异常";
+    //   setTimeout(() => {
+    //     resolve('OK');
+    //     reject('Error');
+    //   }, 1000);      
+    // });
+
+    // console.log(p)
+
+    // const result = p.then(value=>{
+    //   console.log(value);
+    //   // return new Promise((resolve, reject)=>{
+    //   //   resolve("成功");
+    //   //   reject("失败");
+    //   //   // throw "异常";
+    //   // });
+    //   throw "异常";
+    //   return "oh year"
+    // }, reason=>{
+    //   console.warn(reason);
+    //   return "dddd"
+    // })
+
+    // const result = p.catch(reason=>{
+    //   console.warn('catch:', reason);
+    // })
+
+    // const result = 
+    // p.then(
+
+    // )
+    // .then(
+    //   value=>{
+    //     console.log(111);
+    //     throw "----111==throw"
+    //   }
+    // )
+    // .then(value=>{
+    //   console.log(222);
+    // })
+    // .then(value=>{
+    //   console.log(333);
+    // })
+    // .catch(reason=>{
+    //   console.log('reason', reason);
+    // });
+
+    // console.log(result);
+
+
+    // const p2 = Promise.resolve('okokok');
+    // console.log(p2);
+
+    // const p3 = Promise.resolve(new Promise((resolve, reject)=>{
+    //   reject("error")
+    // }))
+    // const p4 = Promise.resolve(Promise.resolve("oh year"));
+
+    // console.log(p3);
+    // console.log(p4);
+
+    // const p5 = Promise.reject("未知的错误");
+    // console.log(p5)
+    // console.log(p5.catch(e=>console.log(e)));
+
+    // let p1 = new Promise((resolve, reject)=>{
+    //   resolve('OK');
+    //   console.log("111");
+    // });
+
+    // p1.then(value=>{
+    //   console.log(222);
+    // });
+
+    // console.log(333);
+
+    let p1 = new Promise((resolve, reject) => {
+      setTimeout(() => {resolve('OK');});
+    });
+    let p2 = Promise.resolve('Success');
+    let p3 = Promise.resolve('Oh Yeah');
+    //调用 race 方法
+    let result = Promise.all([p1, p2, p3]);
+    console.log(result);
+
+  </SCRipt>
+</body>
+</html>
