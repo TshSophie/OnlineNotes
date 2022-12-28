@@ -54,6 +54,7 @@ Promise.prototype.then = function (onResolved, onRejected) {
     onResolved = (value) => value;
   }
   return new Promise((resolve, reject) => {
+    console.log("立即执行then返回的Promise...")
     // 封装函数
     let callback = (func) => {
       try {
@@ -78,18 +79,21 @@ Promise.prototype.then = function (onResolved, onRejected) {
     };
     // 调用回调函数
     if (this.PromiseState === "fulfilled") {
+      console.log("this.PromiseState === fulfilled")
       // 放在定时器里，实现异步效果
       setTimeout(() => {
         callback(onResolved);
       });
     }
     if (this.PromiseState === "rejected") {
+      console.log("this.PromiseState === rejected")
       // 放在定时器里，实现异步效果
       setTimeout(() => {
         callback(onRejected);
       });
     }
     if (this.PromiseState === "pending") {
+      console.log("this.PromiseState === pending")
       // 保存回调函数
       this.callbacks.push({
         onResolved: () => {
@@ -103,9 +107,36 @@ Promise.prototype.then = function (onResolved, onRejected) {
   });
 };
 
+
+Promise.resolve = function(value) {
+  return new Promise((resolve, reject)=>{
+    if(value instanceof Promise){
+      value.then(v => {
+        resolve(v);
+      }, r=>{
+        reject(r);
+      });
+    } else {
+      // 结果的对象状态为【成功】
+      resolve(value);
+    }
+  });
+}
+
 let p1 = new Promise((resolve, reject) => {
   console.log("我是promise...");
   setTimeout(() => {
     resolve("OK");
-  });
+  }, 3000);
 });
+
+p1.then((result) => {
+  console.log('then...resolve执行：', result)
+}, (err) => {
+  console.log('then...reject执行：', err)
+})
+
+
+// Promise.resolve('ok').then((result) => {
+//   console.log(result)
+// })

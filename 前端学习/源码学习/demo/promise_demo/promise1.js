@@ -42,7 +42,7 @@ function Promise(executor) {
     }  
 }
 
-  let p1 = new Promise((resolve, reject) => {
-    console.log("我是promise...")
-    setTimeout(() => {resolve('OK');});
-  });
+let p1 = new Promise((resolve, reject) => {
+  console.log("我是promise...")
+  setTimeout(() => {resolve('OK');});
+});
