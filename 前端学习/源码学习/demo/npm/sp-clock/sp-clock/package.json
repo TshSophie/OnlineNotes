@@ -1,0 +1,11 @@
+{
+  "name": "sp-clock",
+  "version": "1.0.1",
+  "description": "测试更新npm包",
+  "main": "sp-clock.common.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sophie",
+  "license": "ISC"
+}
