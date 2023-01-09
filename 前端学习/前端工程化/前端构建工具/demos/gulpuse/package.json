@@ -10,6 +10,16 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "gulp": "^4.0.2"
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
+    "del": "^7.0.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-less": "^5.0.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-webserver": "^0.9.1"
   }
 }
