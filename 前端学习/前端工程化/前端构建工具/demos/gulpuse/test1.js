@@ -1,22 +1,21 @@
 //  导入 gulp 第三方模块
 const gulp = require('gulp')
-const plugins = require('gulp-load-plugins')();
 // 导入 gulp-cssmin 第三方模块, 用于压缩 css 文件
-const cssmin = plugins.cssmin; // 其实可以不用定义变量，直接在需要使用这个插件的地方 plugins.cssmin() 就可以了
+const cssmin = require('gulp-cssmin')
 // 导入 gulp-autoprefixer 第三方, 用于自动添加前缀
-const autoprefixer =  plugins.autoprefixer
+const autoprefixer = require('gulp-autoprefixer')
 // 导入 gulp-less 第三方, 用于把 less 代码转换成 css 代码
-const less = plugins.less
+const less = require('gulp-less')
 // 导入 gulp-uglify 第三方, 用于把 js 代码压缩
-const uglify = plugins.uglify
+const uglify = require('gulp-uglify')
 // 导入 gulp-babel 第三方, 用于把 es6 转换成 es5
-const babel = plugins.babel
+const babel = require('gulp-babel')
 // 导入 gulp-htmlmin 第三方, 用于压缩 html 文件
-const htmlmin = plugins.htmlmin
+const htmlmin = require('gulp-htmlmin')
 // 导入 gulp-clean 第三方, 用于删除文件夹
-const clean = plugins.clean
+const clean = require('gulp-clean');
 // 导入 gulp-webserver 第三方, 用于在开发阶段启动服务器
-const webserver = plugins.webserver
+const webserver = require('gulp-webserver')
  
 // 配置一个 打包 css 的任务
 const cssHandler = () => {

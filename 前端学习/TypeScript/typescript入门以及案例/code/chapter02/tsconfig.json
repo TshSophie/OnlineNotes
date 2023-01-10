@@ -1,0 +1,17 @@
+{
+  /*
+    "include" 用来指定哪些ts文件需要被编译
+    路径： **  表示任意目录
+            * 表示任意文件
+    "exclude" 不需要被编译的文件目录
+          默认值： ["node_modules", "bower_components", "jspm_packages"]
+    "extends"  定义被继承的配置文件
+    "files"  指定被编译文件的列表，只有需要编译的文件少时才会用到
+  */
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    
+  ]
+}
